@@ -1,0 +1,476 @@
+@CHARSET "UTF-8";
+.span-left
+{
+	width:280px
+}
+.span-right
+{
+	width:918px;
+}
+
+.span-left, .span-right
+{
+	float:left;
+	min-height:90px;
+}
+
+.body-container
+{
+	margin: 0px auto;
+	width:1200px;
+	min-height:600px;
+	background: #f7f8fa;
+	border:2px solid black;	
+	overflow: hidden;
+}
+.top-banner
+{	
+	height:47px;
+	background:#404853;
+	margin-left:-1px;
+}
+
+.logo, .date,.spliter,.user,.logout
+{
+	float:left
+}
+.spliter
+{
+	width:14px;
+	height:43px;
+	background: url("/frwk/picture/spliter.png") no-repeat scroll 0px 0px transparent;
+}
+.logo
+{
+	width:101px;
+	height:43px;
+	background: url("/frwk/picture/logo.png") no-repeat scroll 0px 0px transparent;
+}
+.date
+{
+	color:white;
+	
+	margin-left: 30px;
+	
+	width:800px;
+}
+.new-project-btn
+{
+	width:171px;
+	height:26px;
+	background: url("/frwk/picture/new-project-btn.png") no-repeat scroll 0px 0px transparent;
+	margin-top: 40px;
+	margin-left: 60px;
+	
+}
+.new-project-btn p
+{
+	text-indent: 40px;
+	color: #FFF;
+
+	padding-top: 3px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.date, .user , .logout
+{
+	margin-top: 11px;
+	font-size:18px;
+}
+.user
+{
+	color:white;
+}
+.logout a
+{
+	color:white;
+}
+.logout a:hover
+{
+	color:red
+}
+
+.add-project
+{
+	float:left;
+	border-right:2px solid #d1d8e1;
+	border-bottom:2px solid #d1d8e1;
+}
+.project-title
+{
+	float:left;
+	border-bottom:2px solid #d1d8e1;
+}
+.project-title p
+{
+	text-align: center;
+	margin-top: 30px;
+	font-size: 24px;
+	font-weight: bold;
+}
+.show-project
+{
+	float:left;
+	border-right:2px solid #d1d8e1;
+	border-bottom:2px solid #d1d8e1;
+	min-height:480px;
+	padding-top: 20px;
+}
+.show-project ul .item-list
+{
+	min-height:32px;
+	cursor: pointer;
+	background: url("/frwk/picture/arrow-right.gif") no-repeat scroll 0px 5px transparent;
+}
+.show-project ul .item-list:hover ,.show-project ul .selected
+{
+	background: url("/frwk/picture/select.png") no-repeat scroll 0px 0px transparent;
+}
+
+.show-project ul .item-list .np-list-name
+{
+	
+	text-indent: 30px;
+	padding-top: 5px;
+	font-size:18px;
+}
+
+.new-project
+{
+	display:none;
+	width: 226px;
+	height: 250px;
+	background: url("/frwk/picture/new-project.png") no-repeat scroll 0px 0px transparent;
+	position: absolute;
+	top: 250px;
+	left: 45%;
+	border-radius: 5px;
+	z-index: 1000;
+}
+.new-project .np-title
+{
+	color: #848687;
+	margin-left: 80px;
+	margin-top: 8px;
+}
+.new-project .np-name
+{
+	margin-top: 20px;
+	margin-left: 15px;
+	height: 40px;
+	width: 190px;
+	font-size: 15px;
+}
+
+.new-project .np-date
+{
+	margin-top: 5px;
+	margin-left: 15px;
+	height: 50px;
+	width: 195px;
+	color: #848687;
+}
+.np-year
+{
+	width: 196px;
+}
+.np-line
+{
+	margin-top:5px;
+	width: 196px;
+}
+.np-month
+{
+	width:49%;
+}
+.np-day
+{
+	width:49%;
+	
+}
+.np-year ,.np-month, .np-day
+{
+	height: 20px;
+	color: #848687;
+}
+.np-ok, .ep-ok
+{
+	margin-top: 18px;
+	margin-left: 10px;
+	background: url("/frwk/picture/np-ok.png") no-repeat scroll 0px 0px transparent;
+}
+.np-cancel , .ep-cancel
+{
+	margin-top: 5px;
+	margin-left: 10px;
+	background: url("/frwk/picture/np-cancel.png") no-repeat scroll 0px 0px transparent;
+}
+.np-ok p ,.dp-cancel p, .np-cancel p, .dp-ok p , .ep-cancel p, .ep-ok p
+,.eu-ok p, .eu-cancel p, .a-ok p,  .a-cancel p
+{
+	text-align: center;
+	padding-top:5px;
+}
+.np-btn
+{
+	height:29px;
+	width:177px;
+	cursor: pointer;
+}
+
+.del-project
+{
+	display:none;
+	width: 226px;
+	height: 250px;
+	background: url("/frwk/picture/new-project.png") no-repeat scroll 0px 0px transparent;
+	position: absolute;
+	top: 250px;
+	left: 680px;
+	border-radius: 5px;
+	z-index: 201;
+}
+.del-project .dp-info
+{
+	height: 100px;
+	margin-top: 25px;
+	text-align: left;
+	margin-left: 20px;
+}
+.del-project .dp-title
+{
+	color: #848687;
+	margin-left: 80px;
+	margin-top: 8px;
+}
+.del-project .dp-cancel
+{
+	margin-top: 5px;
+	margin-left: 25px;
+	background: url("/frwk/picture/np-cancel.png") no-repeat scroll 0px 0px transparent;
+}
+.del-project .dp-ok
+{
+	margin-top: 18px;
+	margin-left: 25px;
+	background: url("/frwk/picture/np-ok.png") no-repeat scroll 0px 0px transparent;
+}
+
+.bottom-bar
+{
+	position: relative;
+	left: 300px;
+	width: 1000px;
+	height: 40px;
+	float: left;
+	bottom: 0px;
+}
+.disable
+{
+	color:rgb(212,212,212);
+}
+.bottom-bar ul li
+{
+	float:left;
+	width:80px;
+	height:21px;
+	border:1px solid rgb(212,212,212);
+	border-radius: 2px;
+	margin-right:20px;
+	text-align: center;
+	padding-top: 4px;
+}
+.bottom-bar ul li:hover
+{
+	box-shadow: 0 0 15px rgb(136,178,218);
+}
+
+.edit-project
+{
+	display: none;
+	width: 226px;
+	height: 250px;
+	background: url("/frwk/picture/new-project.png") no-repeat scroll 0px 0px transparent;
+	position: absolute;
+	top: 250px;
+	left: 45%;
+	border-radius: 5px;
+	z-index: 1000;
+}
+
+.edit-project .np-title
+{
+	color: #848687;
+	margin-left: 80px;
+	margin-top: 8px;
+}
+.edit-project .np-name
+{
+	margin-top: 20px;
+	margin-left: 15px;
+	height: 40px;
+	width: 190px;
+	font-size: 15px;
+}
+
+.edit-project .np-date
+{
+	margin-top: 5px;
+	margin-left: 15px;
+	height: 50px;
+	width: 195px;
+	color: #848687;
+}
+
+
+.edit-user
+{
+	display: none;
+	width: 326px;
+	min-height: 250px;
+	background: url("/frwk/picture/panelbase.png") no-repeat scroll 0px 0px transparent;
+	position: absolute;
+	top: 250px;
+	left: 40%;
+	border-radius: 5px;
+	z-index: 1000;
+}
+.edit-user .eu-title
+{
+	color: #848687;
+	text-align: center;
+	margin-top: 8px;
+}
+.edit-user .eu-info
+{
+	margin-top: 20px;
+	min-height:150px;
+	width:100%;
+}
+.edit-user .eu-info ul{
+	text-align: center;
+	margin-bottom:10px;
+}
+.edit-user .eu-info ul li
+{
+	display:inline-block;
+	margin-left: 10px;
+}
+.edit-user .eu-info ul .eu-add
+{
+	height: 22px;
+	width: 240px;
+	border: 1px dashed rgb(206,206,206);
+	border-radius: 5px;
+	padding-top: 5px;
+	color:rgb(206,206,206);
+	cursor: pointer;
+}
+.edit-user .eu-info ul li select
+{
+	height: 26px;
+    width: 120px;
+    border:1px solid rgb(182,192,205);
+    border-radius: 5px;
+}
+
+.edit-user .eu-cancel
+{
+	margin: 10px auto;
+	background: url("/frwk/picture/np-cancel.png") no-repeat scroll 0px 0px transparent;
+}
+.edit-user  .eu-ok
+{
+	color:white;
+	margin: 10px auto;
+	background: url("/frwk/picture/np-ok.png") no-repeat scroll 0px 0px transparent;
+}
+
+
+
+.attach
+{
+	display: none;
+	width: 326px;
+	min-height: 250px;
+	background: url("/frwk/picture/panelbase.png") no-repeat scroll 0px 0px transparent;
+	position: absolute;
+	top: 250px;
+	left: 40%;
+	border-radius: 5px;
+	z-index: 1000;
+}
+.attach .a-title
+{
+	color: #848687;
+	text-align: center;
+	margin-top: 8px;
+}
+.attach .a-info
+{
+	margin-top: 20px;
+	min-height:150px;
+	width:100%;
+}
+.attach .a-info ul{
+	text-align: center;
+	margin-bottom:10px;
+}
+.attach .a-info ul li
+{
+	display:inline-block;
+	margin-bottom: 5px;
+}
+.attach .a-info ul .a-add
+{
+	height: 22px;
+	width: 240px;
+	border: 1px dashed rgb(206,206,206);
+	border-radius: 5px;
+	padding-top: 5px;
+	color:rgb(206,206,206);
+	cursor: pointer;
+}
+
+.attach .a-cancel
+{
+	margin: 10px auto;
+	background: url("/frwk/picture/np-cancel.png") no-repeat scroll 0px 0px transparent;
+}
+.attach  .a-ok
+{
+	color:white;
+	margin: 10px auto;
+	background: url("/frwk/picture/np-ok.png") no-repeat scroll 0px 0px transparent;
+}
+
+.file-box {
+	position: relative;
+}
+
+.txt {
+	height: 22px;
+	border: 1px solid #CDCDCD;
+	width: 180px;
+	float: left;
+}
+
+.btn {
+	background-color: #FFF;
+	border: 1px solid #CDCDCD;
+	height: 26px;
+	width: 20px;
+	float: left;
+	font-size: 8px;
+}
+
+.file {
+	position: absolute;
+	top: 0;
+	right: 0px;
+	height: 24px;
+	filter: alpha(opacity : 0);
+	opacity: 0;
+	width: 200px
+}

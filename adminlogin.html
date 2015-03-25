@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+    <title>目标信息管理系统</title>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+  	<link rel="stylesheet" type="text/css" href="/assets/css/login.css">
+</head>
+<body bgcolor="#303740">
+<div class="body-container login admin-login">
+	<div class="admin-login-field">
+		<div class="login-input">
+			<ul>
+				<li class="user-icon"><input type="text" class="default" default_text="用户名" id="usrname"></li>
+				<li class="key-icon"><input type="password" class="default_pass" default_text="密码"  id="usrpwd"></li>
+				
+			</ul>			
+		</div>
+		<div class="login-btn"><p>登录</p></div>
+	</div>
+</div>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/js/md5-min.js"></script>
+<script type="text/javascript" src="/assets/js/ui.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	document.onkeydown = function(e){
+	    var ev = document.all ? window.event : e;
+	    if(ev.keyCode==13) {
+	    	$('.login-btn').click();//处理事件
+	     }
+	}
+	$('.admin-btn').click(function(){
+		window.location.href = '/adminlogin.html';
+	});
+	$('.login-btn').click(function(){	
+		
+		var data = 'act=login&usrname=' + $('#usrname').val() + '&usrpwd=' + hex_md5($('#usrpwd').val());
+
+        $.ajax({
+            url : '/action/adminLoginAction.php',
+            type : 'post',
+            data : data,//form.serialize(),
+            cache : false,
+            dataType : "json",
+            error : function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("服务器无响应! status: " + textStatus);
+             },
+            success : function(json, textStatus) {
+
+                switch(json['status']){
+                    case 0:
+                    	 window.location.href = '/admin.php';
+                        break;
+                    default:
+	                    alert(json['msg']);
+                        break;
+                }
+            }
+        });
+		return false;
+	});
+
+});
+</script>
+
+</body>
+</html>

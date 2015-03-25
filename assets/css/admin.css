@@ -1,0 +1,291 @@
+@CHARSET "UTF-8";
+
+::-webkit-scrollbar-track-piece {
+	background-color: #f5f5f5;
+	border-left: 1px solid #d2d2d2;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #c2c2c2;
+	background-clip: padding-box;
+	border: 1px solid #979797;
+	min-height: 28px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	border: 1px solid #636363;
+	background-color: #929292;
+}
+
+
+.hidden
+{
+	display:none;
+}
+.left
+{
+	left: 200px;
+}
+.middle
+{
+	left: 650px;
+}
+.right
+{
+	left: 1100px;
+}
+
+.ok
+{
+	position: absolute;
+	bottom: 60px;
+}
+.save ,.cancel
+{
+	position: absolute;
+	bottom: 30px;
+}
+.admin-bg
+{
+	position:relative;
+	width:1600px;
+	height:900px;
+	margin: 0 auto;	
+	margin-top: 50px;
+	background: url("/frwk/picture/admin-bg.jpg") no-repeat scroll 0px 0px transparent;
+}
+
+.admin-field {
+    position: absolute;
+    width: 299px;
+    height: 290px;
+    background: url("/frwk/picture/blank.png") no-repeat scroll 0px 0px transparent;
+    top: 300px;
+    
+    border-radius: 3px;
+}
+
+.admin-field .title
+{
+	position:relative;
+	text-align: center;
+	padding-top: 10px;
+	font-size: 20px;
+}
+
+.btn ,.cancel
+{
+	width: 233px;
+	height: 39px;
+	background: url("/frwk/picture/login-btn.png") no-repeat scroll 0px -39px transparent;	
+	border-radius: 4px;
+	border: 1px solid white;
+	cursor: pointer;
+}
+.ok
+{
+	width: 233px;
+	height: 39px;
+	background: url("/frwk/picture/login-btn.png") no-repeat scroll 0px 0px transparent;
+	border-radius: 4px;
+	border: 1px solid white;
+	color:white;
+	cursor: pointer;
+}
+.btn:hover ,.select
+{
+	background: url("/frwk/picture/login-btn.png") no-repeat scroll 0px 0px transparent;
+	border: 1px solid black;
+	color:white;
+}
+.btn-exit
+{
+	width: 233px;
+	height: 39px;
+	background: url("/frwk/picture/login-btn.png") no-repeat scroll 0px 0px transparent;
+	border: 1px solid black;
+	color:white;
+	margin-left: 33px;
+	margin-top: 28px;
+	cursor: pointer;
+}
+
+.admin-field input[type=text]
+{
+	width: 223px;
+	height: 28px;
+	text-indent: 20px;
+	font-size: 18px;
+}
+.admin-field select
+{
+	font-size: 16px;
+	width: 230px;
+	height: 32px;
+	text-indent: 10px;
+}
+
+
+.margin-from-title
+{
+	margin-top: 30px;
+}
+.margin-normal
+{
+	margin-top:10px;
+}
+
+.margin-small
+{
+	margin-top:5px;
+}
+.btn p ,.btn-exit p, .ok p, .cancel p
+{
+	text-align: center;
+	padding-top: 11px;
+}
+
+.admin-field .btn,
+.admin-field input[type=text],
+.admin-field select,
+.admin-field .text,
+.admin-field .ok,
+.admin-field .cancel
+{
+	margin-left: 33px;
+}
+
+.admin-user
+{
+	height:360px;
+}
+.admin-prompt
+{
+	height:270px;
+}
+.group-del select
+{
+	font-size: 16px;
+}
+
+.group-del select option
+{
+	height:10px;
+	
+	height: 24px;
+	text-indent: 20px;
+	padding-top: 8px;
+}
+.group-modify-confirm,
+.group-delete-confirm
+{
+	height:320px;
+	left:600px;
+	z-index: 201;
+}
+.group-modify
+{
+	
+}
+
+.admin-user-list
+{
+	height:550px;
+}
+
+.list-container
+{
+	position:relative;
+	height: 450px;
+	margin-left: 20px;
+	margin-right: 20px;
+	border: 1px solid rgb(190,191,192);
+	box-shadow: 5px 5px 1px #BEBFC0;
+	background: rgb(231,233,232);
+	overflow-y: auto;
+}
+.list-container ul 
+{
+	position:relative;
+	background: url("/frwk/picture/line.png") no-repeat scroll 0px 0px transparent;
+	padding: 20px 0px 0px;
+	padding-left: 5px;
+}
+.list-container ul  li
+{
+	position:relative;
+	margin-left:10px;
+	height: 24px;
+	border:1px solid transparent;
+	margin-right: 10px;
+}
+.list-container ul  li:hover
+{
+	border:1px solid rgb(201,201,201);
+	background:rgb(211,211,211);
+	border-radius: 15px;
+}
+.name , .group
+{
+	top:4px;
+}
+.list-container ul  li .name
+{
+	position:absolute;
+	left: 30px;
+}
+.list-container ul  li:hover .del_btn
+{
+	display:block;
+	cursor:pointer;
+}
+.list-container ul  li .del_btn {
+	display:none;
+    background: url("/frwk/picture/del-btn.gif") no-repeat scroll 0px 0px transparent;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 23px;
+    height: 23px;
+    z-index: 1;
+}
+
+.list-container ul  li .group
+{
+	position:absolute;
+	right:20px;
+	color:rgb(190,191,192);
+}
+.list-container .list-title
+{
+	position:absolute;
+	top:0px;
+	font-size:18px;
+}
+
+.user-del-confirm
+{
+	display:none;
+	position:absolute;
+	left:600px;
+	top:300px;
+	height:250px;
+	z-index: 201;
+}
+.user-del-confirm .name
+{
+	text-align: center;
+}
+
+.group-modify-confirm .ok,
+.group-delete-confirm .ok,
+.user-del-confirm .ok
+
+{
+	bottom:80px;
+}

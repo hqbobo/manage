@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+a{
+	text-decoration:none;
+}
+.add-user{
+	position: absolute;
+	display: none;
+	top: 200px;
+	margin: 0px auto;
+	left: 500px;
+	width: 400px;
+	height: 300px;
+	background: none repeat scroll 0% 0% white;
+	box-shadow: 1px 1px 4px rgb(136, 136, 136);
+	 -moz-border-radius: 15px;      /* Gecko browsers */
+    -webkit-border-radius: 15px;   /* Webkit browsers */
+    border-radius:15px;            /* W3C syntax */
+    z-index: 999;
+    padding-top: 30px;
+}
+
+.add-user ul {
+	
+	list-style-type:none;
+	padding-left: 75px;
+}
+
+.add-user ul li{
+	
+	text-align: left;
+	margin-top: 10px;
+	min-width: 100px;
+	display: inline-block;
+}
+.add-user li select {
+	width:90%;
+}
+
+.comments
+{
+	position: absolute;
+	display: none;
+	top: 200px;
+	margin: 0px auto;
+	left: 500px;
+	width: 400px;
+	height: 300px;
+	background: none repeat scroll 0% 0% #FFF;
+	box-shadow: 1px 1px 4px #888;
+	border-radius: 15px;
+	z-index: 999;
+	padding-top: 30px;
+}
+.comments .c-title
+{
+	text-align:center;
+	font-size: 24px;
+}
+.comments textarea
+{
+	position: relative;
+	margin-left: 40px;
+	height: 230px;
+	width: 310px;
+}
+.comments .c-submit
+{	
+	text-align: center;
+	margin-top: 5px;
+	font-size: 20px;
+	cursor: pointer;
+	color: blue;
+}
+.comments .c-submit:hover
+{
+	color:red;
+}
+.mask
+{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0.75;
+	background-color: #000;
+	z-index: 200;
+}
+.add-user #close
+{
+    position: absolute;
+    top: 5px;
+    right: 30px;
+    color: red;
+    font-size: 24px;
+    cursor: pointer;
+}
+.add-user #close:hover
+{
+	color:blue;
+}

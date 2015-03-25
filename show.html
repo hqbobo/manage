@@ -1,0 +1,831 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/index.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/menu.css">
+<link rel="stylesheet" media="screen"
+	href="/assets/css/handsontable.full.css">
+<link rel="stylesheet" media="screen" href="/assets/css/b.css">
+<link rel="stylesheet" media="screen" href="/assets/css/jquery-ui.css">
+<style type="text/css">
+.negative {
+	color: red;
+}
+
+.warp {
+	WORD-WRAP: break-word;
+}
+
+
+</style>
+
+<title>项目显示</title>
+</head>
+<body background="#f7f8fa">
+	<div class="body-container">
+		<div class="top-banner">
+			<div class="logo"></div>
+			<div class="spliter"></div>
+			<div class="date">1</div>
+			<div class="user"></div>
+			<div class="spliter"></div>
+			<div class="logout">
+				<a href="logout.php">登出</a>
+			</div>
+		</div>
+		<div class="middle">
+			<div class="span-left add-project">
+				<div class="new-project-btn">
+					<p>+&nbsp;新建项目</p>
+				</div>
+			</div>
+			<div class="span-right project-title">
+				<p>中共成都市青羊区组织部目标信息管理系统,欢迎您回来</p>
+			</div>
+		</div>
+		<div class="main">
+			<div class="span-left show-project year"></div>
+			<div class="span-right" id="text-main">
+				<div id="tbl-main"></div>
+			</div>
+			<div class="clear"></div>
+			<div class="bottom-bar">
+				<ul>
+
+					<li id='save' class="disable">保存</li>
+					<li id='exportxls'>导出</li>
+					<li id='print'>打印</li>
+					<object ID='WebBrowser' WIDTH=0 HEIGHT=0
+						CLASSID='CLSID:8856F961-340A-11D0-A96B-00C04FD705A2'></object>
+					<li id='attach'>添加附件</li>
+					<!--
+					<li id='show'>查看</li> 
+					<li id='addcol'>添加列</li>
+					<li id='addrow'>添加行</li>
+					<li id='delcol'>删除列</li>
+					<li id='delrow'>删除行</li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="new-project">
+		<p class="np-title">新建项目</p>
+		<textarea class="np-name default" default_text="项目名称"></textarea>
+		<div class="np-date">
+			<select class="np-year">
+				<option opid=0>年份</option>
+			</select>
+			<div class="np-line">
+				<select class="np-month">
+					<option>月份</option>
+				</select> <select class="np-day">
+					<option>日期</option>
+				</select>
+			</div>
+			<div class="np-btn np-ok">
+				<p>确认</p>
+			</div>
+			<div class="np-btn np-cancel">
+				<p>取消</p>
+			</div>
+		</div>
+		<!-- 		<div class="np-name edit" placeholder="项目名称"></div> -->
+	</div>
+
+	<div class="edit-project">
+		<p class="np-title">修改项目</p>
+		<textarea class="np-name default" default_text="项目名称"></textarea>
+		<div class="np-date">
+			<select class="np-year">
+				<option opid=0>年份</option>
+			</select>
+			<div class="np-line">
+				<select class="np-month">
+					<option>月份</option>
+				</select> <select class="np-day">
+					<option>日期</option>
+				</select>
+			</div>
+			<div class="np-btn ep-ok">
+				<p>确认</p>
+			</div>
+			<div class="np-btn ep-cancel">
+				<p>取消</p>
+			</div>
+		</div>
+		<!-- 		<div class="np-name edit" placeholder="项目名称"></div> -->
+	</div>
+
+	<div class="del-project">
+		<p class="dp-title">删除</p>
+		<p class="dp-info"></p>
+		<div class="np-btn dp-ok">
+			<p>确认</p>
+		</div>
+		<div class="np-btn dp-cancel">
+			<p>取消</p>
+		</div>
+	</div>
+	<div id="dialog-confirm" title="有未保存项:"></div>
+
+	<!-- 		<div class="np-name edit" placeholder="项目名称"></div> -->
+	<div class="add-user">
+		<ul class="title">
+			<li>责任科室</li>
+			<li>责任人</li>
+			<li>操作</li>
+		</ul>
+		<ul>
+			<li><select>
+					<option>1</option>
+			</select></li>
+			<li><select>
+					<option>1</option>
+			</select></li>
+			<li><a class="addBtn" href="javascript:void(0);">添加</a></li>
+		</ul>
+	</div>
+	<div class="edit-user">
+		<p class="eu-title">编辑</p>
+		<div class="eu-info">
+			<ul>
+				<li><select class="eu-group"></select></li>
+				<li><select class="eu-user"></select></li>
+			</ul>
+			<ul>
+				<li class="eu-add">+ 添加</li>
+			</ul>
+		</div>
+		<div class="np-btn eu-ok">
+			<p>确认</p>
+		</div>
+		<div class="np-btn eu-cancel">
+			<p>取消</p>
+		</div>
+	</div>
+	<div class="attach">
+		<p class="a-title">添加附件</p>
+		<div class="a-info">
+			<ul>
+				
+			</ul>
+			<ul>
+				<li class="a-add">+ 添加</li>
+			</ul>
+		</div>
+		<div class="np-btn a-ok">
+			<p>确认</p>
+		</div>
+		<div class="np-btn a-cancel">
+			<p>取消</p>
+		</div>
+	</div>
+	<div id="mask" class="mask" style="display: none;"></div>
+</body>
+<script type="text/javascript" src="/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/public.js"></script>
+<script type="text/javascript" src="/assets/js/menu.js"></script>
+<script type="text/javascript" src="/assets/js/project.js"></script>
+<script type="text/javascript" src="/assets/js/admin.js"></script>
+<script type="text/javascript" src="/assets/js/handsontable.full.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/assets/js/ui.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var tbl = null;
+		var jsondata = null;
+		var id = $.public.get('id');
+		var unitCol;
+		var personCol;
+		var selectRow;
+
+		function del_project(obj) {
+			$('.del-project .dp-info').html(
+					'确认删除:<br><br>' + obj.find('p').html());
+			$('.del-project .dp-info').attr('attrid', obj.attr('attrid'));
+			$('.del-project').show();
+			$.public.mask(true);
+			//		if(window.confirm("确认删除?")== true)
+			//			alert(obj.attr('attrid'));
+		}
+		var edit_id = 0;
+		function edit_project(obj) {
+			//window.location.href = '/show.html?id=' + obj.attr('attrid');
+			//obj.find('.tt').attr('contentEditable', 'true');
+			//obj.find('.tt').focus();
+			//obj.find('.select').css('display', 'block');
+			//obj.find('.tt').css('color', 'white');
+
+			$.project.get(obj.attr('attrid'), function(json) {
+				edit_id = json[0].t_pkid;
+				$('.edit-project .np-name').val(json[0].t_projectName);
+				$('.edit-project .np-year option').each(function() {
+					if ($(this).attr('opid') == json[0].t_year) {
+						$(this).attr("selected", "selected");
+					}
+				});
+
+				$('.edit-project .np-month option').each(function() {
+					if ($(this).attr('opid') == json[0].t_month) {
+						$(this).attr("selected", "selected");
+					}
+				});
+				$('.edit-project .np-day option').each(function() {
+					if ($(this).attr('opid') == json[0].t_day) {
+						$(this).attr("selected", "selected");
+					}
+				});
+			});
+			$('.edit-project').show();
+			$.public.mask(true);
+		}
+
+		function editCheck() {
+			if ($('.edit-project .np-name').val().length == 0) {
+				alert('需要填写项目名称');
+				$('.np-name').focus();
+				return false;
+			}
+			if ($('.edit-project .np-year option:selected').attr('opid') == 0) {
+				alert('需要选择年份');
+				$('.np-year').focus();
+				return false;
+			}
+			if ($('.edit-project .np-month option:selected').attr('opid') == 0) {
+				alert('需要选择月份');
+				$('.np-month').focus();
+				return false;
+			}
+			if ($('.edit-project .np-day option:selected').attr('opid') == 0) {
+				alert('需要选择日期');
+				$('.np-day').focus();
+				return false;
+			}
+
+			return true;
+		}
+
+		$('.ep-ok').click(
+				function() {
+
+					if (editCheck() == false)
+						return;
+
+					var data = 'act=edit'
+							+ '&pjname='
+							+ $('.edit-project .np-name').val()
+							+ '&year='
+							+ $('.edit-project .np-year option:selected').attr(
+									'opid')
+							+ '&month='
+							+ $('.edit-project .np-month option:selected')
+									.attr('opid')
+							+ '&day='
+							+ $('.edit-project .np-day option:selected').attr(
+									'opid') + '&id=' + edit_id;
+					$.ajax({
+						url : '/action/projectAction.php',
+						type : 'post',
+						data : data,//form.serialize(),
+						cache : false,
+						dataType : "json",
+						error : function(XMLHttpRequest, textStatus,
+								errorThrown) {
+							alert("添加服务器无响应! status: " + textStatus);
+							//window.location.href = '/login.html';
+							$('.edit-project').hide();
+							$.public.mask(false);
+						},
+						success : function(json, textStatus) {
+
+							switch (json['status']) {
+							case 0:
+								alert(json['msg']);
+								window.location.reload();
+								break;
+							default:
+								alert(json['msg']);
+								break;
+							}
+							//$.menu.menuInit($('.show-project'));
+							//$('.new-project').hide();
+							//$.public.mask(false);
+						}
+					});
+
+				});
+		$('.ep-cancel').click(function() {
+			$('.edit-project').hide();
+			$.public.mask(false);
+		});
+
+		$('.submenu .tt').live(
+				"blur",
+				function() {
+					$.project.changeTitle($(this).parent('li').attr('attrid'),
+							$(this).html());
+					//$(this).parent('li').find('.select').css('display', 'none');
+					//$(this).parent('li').find('.tt').css('color', 'black');
+				});
+		function click_project(obj) {
+			if (obj.find('.tt').attr('contentEditable') == 'true')
+				return;
+			if ($('#save').hasClass('disable')) {
+				window.location.href = '/show.html?id=' + obj.attr('attrid');
+			} else {
+				$("#dialog-confirm").dialog(
+						{
+							resizable : false,
+							height : 150,
+							modal : true,
+							zIndex : 999,
+							//autoOpen: false,
+							buttons : {
+								"跳转" : function() {
+									window.location.href = '/show.html?id='
+											+ obj.attr('attrid');
+								},
+								"不跳转" : function() {
+									$(this).dialog("close");
+								}
+							}
+						});
+			}
+		}
+
+		function select_function(obj) {
+
+			obj.parent('ul').parent('.submenu').parent('.item-list').find(
+					'.np-list-name').click();
+		}
+
+		$('.add-user #close').live("click", function() {
+			reParse();
+			$('.add-user').hide();
+			$.public.mask(false);
+		});
+		$('.add-user .delBtn').live("click", function() {
+			$(this).parent('li').parent('ul').remove();
+		});
+		$('.add-user .addBtn')
+				.live(
+						"click",
+						function() {
+
+							html = "";
+							html += '<ul class="add-user-data">';
+							html += '<li class="au-group">'
+									+ $('.add-user .addgroup').find(
+											'option:selected').html() + '</li>';
+							html += '<li class="au-user" >'
+									+ $('.add-user .adduser').find(
+											'option:selected').html() + '</li>';
+							html += '<li><a class="delBtn" href="javascript:;">删除</a></li>';
+							html += '</ul>';
+
+							$(this).parent('li').parent('ul').before(html);
+							;
+						});
+
+		$('.eu-add')
+				.live(
+						"click",
+						function() {
+							$(this)
+									.parent('ul')
+									.before(
+											'<ul><li><select class="eu-group"></select></li><li><select class="eu-user"></select></li></ul>');
+							var group = $(this).parent('ul').prev("ul").find(
+									'.eu-group');
+							var user = $(this).parent('ul').prev("ul").find(
+									'.eu-user');
+							var gid = 0;
+							$.admin
+									.groupGetAll(function(list) {
+										var html = "";
+										for ( var i in list) {
+											if (i == 0)
+												gid = list[i].t_pkId;
+											html += '<option value="'+list[i].t_pkId+'">'
+													+ list[i].t_groupName
+													+ '</option>';
+										}
+										group.html(html);
+
+										if (gid != 0) {
+											//alert(gid);
+											$.admin
+													.userGetByGroup(
+															gid,
+															function(list) {
+																html = "";
+																for ( var i in list) {
+																	//alert(list[i].t_groupName);
+																	html += '<option value="'+list[i].pk_id+'">'
+																			+ list[i].t_name
+																			+ '</option>';
+																}
+																user.html(html);
+															});
+										}
+
+									});
+						});
+
+		$('.edit-user .eu-group').live(
+				"change",
+				function() {
+					var gid = $(this).find('option:selected').val();
+					//alert(gid);
+					var user = $(this).parent('li').parent('ul').find(
+							'.eu-user');
+					$.admin.userGetByGroup(gid, function(list) {
+						var html = "";
+						for ( var i in list) {
+							//alert(list[i].t_groupName);
+							html += '<option value="'+list[i].pk_id+'">'
+									+ list[i].t_name + '</option>';
+						}
+						user.html(html);
+					});
+					//alert($('.add-user .addgroup').find('option:selected').val());
+				});
+
+		$('.edit-user  .eu-ok').click(function() {
+			reParse();
+			$('.edit-user').hide();
+			$.public.mask(false);
+		});
+		$('.edit-user  .eu-cancel').click(function() {
+			$('.edit-user').hide();
+			$.public.mask(false);
+		});
+		function showChoiceDiv(row, units, users) {
+			var div = $('.edit-user');
+			var info = div.find('.eu-info');
+			$.public.mask(true);
+			div.show();
+
+			info.html('<ul><li class="eu-add">+ 添加</li></ul>');
+
+			var unitstrs = new Array(); //定义一数组
+			if (units != null) {
+				unitstrs = units.split("\n"); //字符分割
+
+				var userstrs = new Array();
+
+				userstrs = users.split("\n");
+				for (i = 0; i < unitstrs.length; i++) {
+					if (unitstrs[i] == "")
+						continue;
+					$('.eu-add').click();
+				}
+				var ul = info.find('ul:first');
+				for (i = 0; i < unitstrs.length; i++) {
+					if (unitstrs[i] == "")
+						continue;
+					var group = ul.find('.eu-group');
+					var user = ul.find('.eu-user');
+					group.find('option').each(function() {
+						//alert($(this).html()+" ==== "+unitstrs[i]);
+						if ($(this).html() == unitstrs[i]) {
+							//alert($(this).html());
+							$(this).attr('selected', 'selected');
+							return;
+						}
+					});
+					group.change();
+					user.find('option').each(function() {
+						if ($(this).html() == userstrs[i]) {
+							$(this).attr('selected', 'selected');
+							return;
+						}
+					});
+					ul = ul.next("ul");
+				}
+			}
+		}
+		function reParse() {
+			var div = $('.edit-user');
+			var group = "";
+			var users = "";
+			$('.edit-user .eu-group option:selected').each(function() {
+				group += $(this).html() + "\n";
+				//alert($(this).html());
+
+			});
+			$('.edit-user .eu-user option:selected').each(function() {
+				users += $(this).html() + "\n";
+				//alert($(this).html());
+
+			});
+			//alert(selectRow+'   '+unitCol+'   '+group);
+			tbl.setDataAtCell(parseInt(selectRow), parseInt(unitCol), group);
+			tbl.setDataAtCell(parseInt(selectRow), parseInt(personCol), users);
+		}
+		$('#attach').click(function() {
+			$('.attach').show();
+			$.public.mask(true);
+		});
+
+		$('.attach  .a-ok').click(function() {
+			$('.attach').hide();
+			$.public.mask(false);
+		});
+		$('.attach  .a-cancel').click(function() {
+			$('.attach').hide();
+			$.public.mask(false);
+		});
+		$('.attach .a-add').click(function() {
+			var html = "";
+				html+=('<li><div class="file-box">'+
+					'<input type="text" name="textfield" id="textfield" class="txt" />'+
+					'<input type="button" class="btn" value="..." /> <input '+
+					'type="file" name="fileField" class="file" id="fileField"'+
+					'" /></div></li>');
+				$(this).parent('ul').prev().append(html);
+		});
+		$('.file').live("change", function(){
+			//alert($(this).val());
+			$(this).parent('div').find('.txt').val($(this).val());
+		});
+		/* 		function showChoiceDiv(row, units, users) {
+		 var div = $('.edit-user');
+		 $.public.mask(true);
+		 div.show();
+		 return;
+		 var html = '<ul class="title">' + '<li>责任科室</li>' + '<li>责任人</li>'
+		 + '<li>操作</li>' + '</ul>';
+		 var unitstrs = new Array(); //定义一数组
+		 if (units != null) {
+		 unitstrs = units.split("\n"); //字符分割
+		 var userstrs = new Array();
+		 userstrs = users.split("\n");
+		 for (i = 0; i < unitstrs.length; i++) {
+
+		 if (unitstrs[i] == "")
+		 break;
+		 html += '<ul class="add-user-data">';
+
+		 html += '<li class="au-group">' + unitstrs[i] + '</li>';
+		 html += '<li class="au-user" >' + userstrs[i] + '</li>';
+		 html += '<li><a class="delBtn" href="javascript:;">删除</a></li>';
+		 html += '</ul>';
+		 }
+		 }
+
+		 html += "<ul><li><select class='addgroup'><option>1</option><option>2</option></select></li>";
+		 html += "<li><select class='adduser'><option>3</option><option>4</option></select></li>";
+		 html += '<li><a class="addBtn" href="javascript:return;">添加</a></li></ul>';
+		 html += '<div id="close">X</div>'
+		 div.html(html);
+		 div.show();
+		 }
+		 function reParse() {
+		 var div = $('.add-user');
+		 var group = "";
+		 var users = "";
+		 $('.add-user .add-user-data .au-group').each(function() {
+		 group += $(this).html() + "\n";
+		 //alert($(this).html());
+
+		 });
+		 $('.add-user .add-user-data .au-user').each(function() {
+		 users += $(this).html() + "\n";
+		 //alert($(this).html());
+
+		 });
+		 //alert(selectRow+'   '+unitCol+'   '+group);
+		 tbl.setDataAtCell(parseInt(selectRow), parseInt(unitCol), group);
+		 tbl.setDataAtCell(parseInt(selectRow), parseInt(personCol), users);
+		 } */
+
+		function setSelect(row) {
+			//alert("row:"+row);
+
+			if (row == 0) {
+				return;
+			}
+			var head = tbl.getData()[0];
+			var data = tbl.getData()[row];
+
+			for ( var i in head) {
+				if (head[i] == '责任人')
+					personCol = i;
+				if (head[i] == '责任科室')
+					unitCol = i;
+			}
+			showChoiceDiv(row, data[unitCol], data[personCol]);
+			selectRow = row;
+			var html = "";
+			var gid = 0;
+			$.admin.groupGetAll(function(list) {
+				var html = "";
+				for ( var i in list) {
+					//alert(list[i].t_groupName);
+					if (i == 0)
+						gid = list[i].t_pkId;
+
+					html += '<option value="'+list[i].t_pkId+'">'
+							+ list[i].t_groupName + '</option>';
+				}
+				$('.add-user .addgroup').html(html);
+
+				if (gid != 0) {
+					//alert(gid);
+					$.admin.userGetByGroup(gid, function(list) {
+						var html = "";
+						for ( var i in list) {
+							//alert(list[i].t_groupName);
+							html += '<option value="'+list[i].pk_id+'">'
+									+ list[i].t_name + '</option>';
+						}
+						$('.add-user .adduser').html(html);
+					});
+				}
+			});
+
+			//alert(personCol+":"+data[personCol]+"--"+unitCol+":"+data[unitCol]);
+			//var colUnit;
+		}
+		$('.add-user .addgroup').live(
+				"change",
+				function() {
+					//alert($('.add-user .addgroup').find('option:selected').val());
+
+					$.admin.userGetByGroup($('.add-user .addgroup').find(
+							'option:selected').val(), function(list) {
+						var html = "";
+						for ( var i in list) {
+							//alert(list[i].t_groupName);
+							html += '<option value="'+list[i].pk_id+'">'
+									+ list[i].t_name + '</option>';
+						}
+						$('.add-user .adduser').html(html);
+					});
+					//alert($('.add-user .addgroup').find('option:selected').val());
+				});
+
+		$('#show').click(function() {
+			alert(JSON.stringify(tbl.getData())); //returns all cells' data
+		});
+		$('#save').click(function() {
+			//alert(id); //returns all cells' data
+			if ($(this).hasClass('disable'))
+				return;
+			$.project.savetbl(id, JSON.stringify(tbl.getData()));
+			$('#save').addClass('disable');
+		})
+
+		$('#exportxls').click(function() {
+			window.location.href = './down-xls.php?id=' + id;
+		});
+		function printpage(myDiv) {
+			//var newstr = document.all.item(myDiv).innerHTML;
+			var newstr = document.getElementById(myDiv).innerHTML;
+			alert(newstr);
+			var oldstr = document.body.innerHTML;
+			document.body.innerHTML = newstr;
+			window.print();
+			document.body.innerHTML = oldstr;
+			return false;
+		}
+		;
+		$('#print').click(function() {
+			printpage('tbl-main');
+		});
+
+		function tbl_onload() {
+			var main = document.getElementById('tbl-main');
+			var fixCol = new Array('项目', "责任科室", '责任人', "完成情况");
+			var readOnlyRow = new Array('责任人', '责任科室', "完成情况");
+			function fixColCheck(name) {
+				//alert(name);
+				for ( var i in fixCol) {
+					if (name == fixCol[i]) {
+						return true;
+					}
+				}
+
+				return false;
+			}
+
+			function readOnlyColCheck(name) {
+				//alert(name);
+				for ( var i in readOnlyRow) {
+					if (name == readOnlyRow[i]) {
+						return true;
+					}
+				}
+				return false;
+			}
+			function textWarp(instance, td, row, col, prop, value,
+					cellProperties) {
+				Handsontable.renderers.TextRenderer.apply(this, arguments);
+				td.className = 'warp'; //add class "negative"
+				var meta = instance.getCellMeta(row, col);
+				if (meta.readOnly) {
+					td.className += ' negative';
+				}
+			}
+			function getCarData() {
+				return [
+						[ "项目", "责任科室", "责任人", "完成情况" ],
+						[ "2009", '科室1\n科室2\n科室3', '员工1\n员工2\n员工3', 14 ],
+						[ "2010", '科室1\n科室2\n科室3\n科室5', '员工1\n员工2\n员工3\n员工35',
+								12 ] ];
+			}
+			tbl = new Handsontable(
+					main,
+					{
+						data : jsondata,
+						colWidths : [ 80, 100, 100, 100 ],
+						manualColumnResize : true,
+						manualRowResize : true,
+						rowHeaders : true,
+						colHeaders : true,
+						minSpareRows : 1,
+						persistentState : true,
+						contextMenu : true,
+						contextMenu : {
+							callback : function(key, options) {
+								if (key === 'set_user') {
+									setSelect(this.getSelected()[0]);
+								}
+
+							},
+							items : {
+								"set_user" : {
+									name : '编辑'
+								},
+								"row_below" : {
+									name : '添加行'
+								},
+								"remove_row" : {
+									name : '删除行'
+								},
+								"col_right" : {
+									name : '添加右边列'
+								},
+								"col_left" : {
+									name : '添加左边列'
+								},
+								"remove_col" : {
+									name : '删除列'
+								}
+							}
+						},
+						cells : function(row, col, prop) {
+							var cellProperties = {};
+							cellProperties.readOnly = false;
+							if (row === 0) {
+								if (fixColCheck(this.instance.getData()[row][col]) == true) {
+									cellProperties.readOnly = true; //make cell read-only if it is first row or the text reads 'readOnly'
+								} else
+									cellProperties.readOnly = false;
+							}
+
+							if (readOnlyColCheck(this.instance.getData()[0][col]) == true)
+								cellProperties.readOnly = true; //make cell read-only if it is first row or the text reads 'readOnly'
+
+							cellProperties.renderer = textWarp; //uses lookup map    	    
+							return cellProperties;
+						},
+						beforeRemoveCol : function(index, amount) {
+							var name = this.getData()[0][index];
+							if (fixColCheck(name) == true) {
+								alert("固定列不允许删除");
+								return false;
+							}
+
+						},
+						afterChange : function(changes, source) {
+
+							if (source == 'edit')
+								$('#save').removeClass('disable');
+						}
+					});
+		}
+		function onload(json) {
+			//alert(json[0].t_projectName);
+			//alert(JSON.stringify(json));
+			$('.project-title').find('p').html(json[0].t_projectName);
+			//var text = json[0].t_tables.replace(/\'/g,'"');
+			//alert(text);
+			jsondata = eval(json[0].t_tables);
+			tbl_onload();
+		}
+		function on_finish(obj) {
+			$.project.get(id, onload);
+		}
+
+		$.menu.menuInit($('.show-project'), id, select_function, on_finish);
+		$.menu.bind(del_project, edit_project, click_project);
+
+		$.public.showTest(id);
+	});
+</script>
+</html>

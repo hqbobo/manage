@@ -1,0 +1,112 @@
+@CHARSET "UTF-8";
+
+.login
+{
+	position:relative;
+	width:1600px;
+	height:900px;
+	background: url("/frwk/picture/main-1.gif") no-repeat scroll 0px 0px transparent;
+	margin: 0 auto;	
+}
+.admin-login
+{
+	background: url("/frwk/picture/admin-bg.jpg") no-repeat scroll 0px 0px transparent;
+}
+.admin-login-field
+{
+	position: absolute;
+	width: 299px;
+	height: 290px;
+	background: url("/frwk/picture/login-field.png") no-repeat scroll 0px 0px transparent;
+	top: 400px;
+	left: 650px;
+	border-radius: 10px;
+}
+.login-field
+{
+	position: absolute;
+	width: 299px;
+	height: 350px;
+	background: url("/frwk/picture/login-field.png") no-repeat scroll 0px 0px transparent;
+	top: 400px;
+	left: 650px;
+	border-radius: 10px;
+}
+.login-input
+{
+	margin-top: 80px;
+	margin-left: 50px;
+}
+.login-input ul li
+{
+	height: 30px;
+	width: 200px;
+	margin-bottom: 10px;
+	text-indent: 35px;
+}
+.login-input ul li input
+,.admin-login-field ul li input
+{
+	border:0px;
+	margin-top: 2px;
+	height: 24px;
+	width: 160px;
+	background:#e7e9e8;
+	font-size: 18px;
+}
+.forget
+{
+	margin-left: 200px;
+	margin-top: 20px;
+}
+.forget p
+{
+	cursor: pointer;
+	width: 60px;
+	color: rgb(117, 117, 117);
+}
+.forget p:hover
+{
+	color:blue;
+}
+.login-btn
+{
+	width: 230px;
+	height: 39px;
+	background: url("/frwk/picture/login-btn.png") no-repeat scroll 0px 0px transparent;
+	border-radius: 4px;
+	border: 1px solid black;
+	margin-left: 33px;
+	margin-top: 52px;
+	cursor: pointer;
+}
+
+.admin-btn
+{
+	width: 233px;
+	height: 39px;
+	background: url("/frwk/picture/login-btn.png") no-repeat scroll 0px -39px transparent;
+	border-radius: 4px;
+	margin-left: 33px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+.admin-btn p
+{
+	text-align: center;
+	padding-top: 8px;
+}
+.login-btn p 
+{
+	color: white;
+	text-align: center;
+	margin-top:8px;
+}
+.user-icon
+{
+	background: url("/frwk/picture/user-icon.png") no-repeat scroll 0px 0px transparent;
+}
+.key-icon
+{
+	background: url("/frwk/picture/key-icon.png") no-repeat scroll 0px 0px transparent;
+}

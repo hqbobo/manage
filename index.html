@@ -1,0 +1,103 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/index.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/menu.css">
+<title>项目主页</title>
+</head>
+<body background="#f7f8fa">
+	<div class="body-container">
+		<div class="top-banner">
+			<div class="logo"></div>
+			<div class="spliter"></div>
+			<div class="date">1</div>
+			<div class="user"></div>
+			<div class="spliter"></div>
+			<div class="logout"><a href="logout.php">登出</a></div>
+		</div>
+		<div class="middle">
+			<div class="span-left add-project"><div class="new-project-btn"><p>+&nbsp;新建项目</p></div></div>
+			<div class="span-right project-title">
+				<p>中共成都市青羊区组织部目标信息管理系统,欢迎您回来</p>
+				
+			</div>
+		</div>
+		<div class="main">
+			<div class="span-left show-project year">
+				
+			</div>
+			<div class="span-right main-bg" id="text-main"></div>
+		</div>
+	</div>
+	<div class="new-project">
+		<p class="np-title">新建项目</p>
+		<textarea class="np-name" placeholder="项目名称"></textarea>
+		<div class="np-date">
+			<select class="np-year">
+				<option opid=0>年份</option>
+			</select>
+			<div class="np-line">
+				<select class="np-month">
+					<option>月份</option>
+				</select>
+				<select class="np-day">
+					<option>日期</option>
+				</select>
+			</div>
+			<div class="np-btn np-ok"><p>确认</p></div>
+			<div class="np-btn np-cancel"><p>取消</p></div>
+		</div>
+<!-- 		<div class="np-name edit" placeholder="项目名称"></div> -->
+	</div>
+	<div class="del-project">
+		<p class="dp-title">删除</p>
+		<p class="dp-info"></p>
+			<div class="np-btn dp-ok"><p>确认</p></div>
+			<div class="np-btn dp-cancel"><p>取消</p></div>
+		</div>
+<!-- 		<div class="np-name edit" placeholder="项目名称"></div> -->
+	</div>
+	<div id="mask" class="mask" style="display:none;">    
+</div>
+</body>
+<script type="text/javascript" src="/assets/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/public.js"></script>
+<script type="text/javascript" src="/assets/js/menu.js"></script>
+<script type="text/javascript">
+$(function(){	
+	function del_project(obj)
+	{
+		$('.del-project .dp-info').html('确认删除:<br>'+obj.find('p').html());
+		$('.del-project .dp-info').attr('attrid',obj.attr('attrid'));
+		$('.del-project').show();
+		$.public.mask(true);
+//		if(window.confirm("确认删除?")== true)
+//			alert(obj.attr('attrid'));
+	}
+	function edit_project(obj)
+	{
+		window.location.href = '/show.html?id='+obj.attr('attrid');
+	}
+	function click_project(obj)
+	{
+		window.location.href = '/show.html?id='+obj.attr('attrid');
+	}
+	function select_function(obj)
+	{
+		obj.find('.tt').css('color','white');
+		obj.find('.select').css('display','block');
+		obj.parent('ul').parent('.submenu').parent('.item-list').find('.np-list-name').click();
+	}
+	
+	var id = $.public.get('id');
+	if(id == null) id = 0;
+	$.menu.menuInit($('.show-project'),id,select_function);
+	$.menu.bind(del_project,edit_project,click_project);
+	
+	
+});
+</script>
+</html>
