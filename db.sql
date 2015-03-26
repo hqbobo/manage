@@ -33,3 +33,13 @@ CREATE TABLE  `admin`.`user` (
 
 insert into user (t_account, t_pwd, t_name , t_level, fk_t_group) 
 values ("admin", "e10adc3949ba59abbe56e057f20f883e", "管理员", 9, 0);
+
+DROP TABLE IF EXISTS `admin`.`attach`;
+CREATE TABLE  `admin`.`attach` (
+  `t_pkId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `url` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `fk_projectId` int(10) unsigned NOT NULL,
+  `name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `fk_user` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`t_pkId`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
