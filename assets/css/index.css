@@ -207,7 +207,7 @@
 	background: url("/frwk/picture/np-cancel.png") no-repeat scroll 0px 0px transparent;
 }
 .np-ok p ,.dp-cancel p, .np-cancel p, .dp-ok p , .ep-cancel p, .ep-ok p
-,.eu-ok p, .eu-cancel p, .a-ok p,  .a-cancel p
+,.eu-ok p, .eu-cancel p, .a-ok p,  .a-cancel p, .l-ok p, .l-cancel p
 {
 	text-align: center;
 	padding-top:5px;
@@ -257,15 +257,128 @@
 	background: url("/frwk/picture/np-ok.png") no-repeat scroll 0px 0px transparent;
 }
 
+
+.leave
+{
+	display:none;
+	width: 226px;
+	height: 250px;
+	background: url("/frwk/picture/new-project.png") no-repeat scroll 0px 0px transparent;
+	position: absolute;
+	top: 250px;
+	left: 45%;
+	border-radius: 5px;
+	z-index: 201;
+}
+.leave .l-info
+{
+	height: 100px;
+	margin-top: 25px;
+	text-align: left;
+	margin-left: 20px;
+}
+.leave .l-title
+{
+	color: #848687;
+	margin-left: 80px;
+	margin-top: 8px;
+}
+.leave .l-cancel
+{
+	margin-top: 5px;
+	margin-left: 25px;
+	background: url("/frwk/picture/np-cancel.png") no-repeat scroll 0px 0px transparent;
+}
+.leave .l-ok
+{
+	margin-top: 18px;
+	margin-left: 25px;
+	background: url("/frwk/picture/np-ok.png") no-repeat scroll 0px 0px transparent;
+}
+
 .bottom-bar
 {
 	position: relative;
 	left: 300px;
-	width: 1000px;
+	width: 830px;
 	height: 40px;
 	float: left;
 	bottom: 0px;
+	margin-top: 20px;
 }
+.attach-bar
+{
+	position: relative;
+	float: left;
+	height: 110px;
+	width: 360px;
+	overflow-x: visible;
+}
+.attach-bar ul
+{
+	display: block;
+	height: 110px;
+	width: 360px;
+	overflow-x: auto;
+	white-space: nowrap;
+	overflow-y: hidden;
+}
+.attach-bar ul li
+{
+	position: relative;
+	display: inline-block;
+	width: 70px;
+	height: 110px;
+	overflow: visible;
+	margin-left: 20px;
+    margin-top: 5px;
+}
+.attach-bar ul li p
+{
+	margin-top: 42px;
+	position: relative;
+	display: block;
+	width: 80px;
+	text-align: center;
+	margin-left: -20px;
+	overflow: hidden;
+}
+.attach-bar ul li a
+{
+	color:blue;
+	position: relative;
+	display: block;
+	margin-left: 8px;
+	margin-top: 10px;
+}
+.attach-bar .doc
+{
+	background: url("/frwk/picture/doc.png") no-repeat scroll 0px 0px transparent;
+}
+.attach-bar .pic
+{
+	background: url("/frwk/picture/pic_icon.png") no-repeat scroll 0px 0px transparent;
+}
+.attach-bar .rar
+{
+	background: url("/frwk/picture/rar_icon.png") no-repeat scroll 0px 0px transparent;
+}
+.attach-bar .unkown
+{
+	background: url("/frwk/picture/file_icon.png") no-repeat scroll 0px 0px transparent;
+}
+.attach-bar .cross
+{
+	cursor: pointer;
+	position:absolute;
+	display:none;
+	width:16px;
+	height:16px;
+	background: url("/frwk/picture/cross.png") no-repeat scroll 0px 0px transparent;
+	top: 0px;
+	left: -5px;
+}
+
 .disable
 {
 	color:rgb(212,212,212);

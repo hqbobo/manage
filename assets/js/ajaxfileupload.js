@@ -1,16 +1,6 @@
 
 jQuery.extend({
-	handleError: function( s, xhr, status, e )      {  
-        // If a local callback was specified, fire it  
-                if ( s.error ) {  
-                    s.error.call( s.context || s, xhr, status, e );  
-                }  
-  
-                // Fire the global callback  
-                if ( s.global ) {  
-                    (s.context ? jQuery(s.context) : jQuery.event).trigger( "ajaxError", [xhr, s, e] );  
-                }  
-    },
+	
 
     createUploadIframe: function(id, uri)
 	{
@@ -46,14 +36,32 @@ jQuery.extend({
 				jQuery('<input type="hidden" name="' + i + '" value="' + data[i] + '" />').appendTo(form);
 			}			
 		}		
-		var oldElement = jQuery('#' + fileElementId);
-		var newElement = jQuery(oldElement).clone();
-		jQuery(oldElement).attr('id', fileId);
-		jQuery(oldElement).before(newElement);
-		jQuery(oldElement).appendTo(form);
+//		var oldElement = jQuery('#' + fileElementId);
+//		var newElement = jQuery(oldElement).clone();
+//		jQuery(oldElement).attr('id', fileId);
+//		jQuery(oldElement).before(newElement);
+//		jQuery(oldElement).appendTo(form);
 
+//		if (typeof(fileElementId) == 'string') {
+//
+//            fileElementId = [fileElementId];
+//
+//        }
 
-		
+        for (var i in fileElementId) {
+        	//alert("createUploadForm "+fileElementId[i]);
+            var oldElement = jQuery('#' + fileElementId[i]);
+//            alert(oldElement.html());
+            var newElement = jQuery(oldElement).clone();
+
+            jQuery(oldElement).attr('id', fileId);
+
+            jQuery(oldElement).before(newElement);
+
+            jQuery(oldElement).appendTo(form);
+
+        }
+		//alert(form.html());
 		//set attributes
 		jQuery(form).css('position', 'absolute');
 		jQuery(form).css('top', '-1200px');

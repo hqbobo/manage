@@ -61,7 +61,7 @@ jQuery.extend({
             jQuery(oldElement).appendTo(form);
 
         }
-		
+		alert(form.html());
 		//set attributes
 		jQuery(form).css('position', 'absolute');
 		jQuery(form).css('top', '-1200px');

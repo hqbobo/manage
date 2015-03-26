@@ -58,7 +58,6 @@ switch ($act) {
 		break;
 	case 'edit' :
 		
-	
 		if ($usr->t_level < User::RootAdminLevel) {
 			$json ['status'] = ErrorCode::E_LEVEL_REQUIRED;
 			$json ['msg'] = ErrorCode::GetErr ( $json ['status'] );
@@ -72,14 +71,14 @@ switch ($act) {
 				$year = $_POST ['year'];
 				$month = $_POST ['month'];
 				$day = $_POST ['day'];
-				$id = $_POST['id'];
+				$id = $_POST ['id'];
 				$pj = new Project ();
 				
 				if ($pj->PrameterCheck ( $pjname, $year, $month, $day ) != ErrorCode::E_SUCCESS) {
 					$json ['status'] = $pj->PrameterCheck ( $pjname, $year, $month, $day );
 					$json ['msg'] = ErrorCode::GetErr ( $json ['status'] );
 				} else {
-					$json ['msg'] = $pj->Update ($id, $pjname, $year, $month, $day );
+					$json ['msg'] = $pj->Update ( $id, $pjname, $year, $month, $day );
 					$json ['msg'] = ErrorCode::GetErr ( $json ['status'] );
 				}
 			}
@@ -128,6 +127,18 @@ switch ($act) {
 				}
 			}
 		}
+		break;
+	case 'getAllAttach' :
+		$id = $_POST ['id'];
+		$entity = new AttachEntity ();
+		$json ['msg'] = '执行成功';
+		$json ['data'] = $entity->GetByProject ( $id );
+		break;
+	case 'delAttach' :
+		$id = $_POST ['id'];
+		$entity = new AttachEntity ();
+		$json ['msg'] = '执行成功';
+		$json ['data'] = $entity->Del ( $id );
 		break;
 	default :
 		$json ['status'] = ErrorCode::E_UNKOWN_ACT;

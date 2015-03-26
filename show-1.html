@@ -6,6 +6,8 @@
 <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
 <link rel="stylesheet" type="text/css" href="/assets/css/index.css">
 <link rel="stylesheet" type="text/css" href="/assets/css/menu.css">
+<link href="/assets/js/ajaxfileupload/ajaxfileupload.css"
+	type="text/css" rel="stylesheet">
 <link rel="stylesheet" media="screen"
 	href="/assets/css/handsontable.full.css">
 <link rel="stylesheet" media="screen" href="/assets/css/b.css">
@@ -35,10 +37,10 @@
 		</div>
 		<div class="middle">
 			<div class="span-left add-project">
-<!--				<div class="new-project-btn">
+				<!--				<div class="new-project-btn">
 					<p>+&nbsp;新建项目</p>
 				</div>-->
-			</div> 
+			</div>
 			<div class="span-right project-title">
 				<p>中共成都市青羊区组织部目标信息管理系统,欢迎您回来</p>
 			</div>
@@ -54,12 +56,21 @@
 
 					<li id='save' class="disable">保存</li>
 					<li id='exportxls'>导出</li>
+					<li id='attach'>添加附件</li>
 					<!--
 					<li id='show'>查看</li> 
 					<li id='addcol'>添加列</li>
 					<li id='addrow'>添加行</li>
 					<li id='delcol'>删除列</li>
 					<li id='delrow'>删除行</li> -->
+				</ul>
+			</div>
+			<div class="left attach-bar">
+				<ul>
+					<li class="doc">
+						<p>测试文档</p> <a href="/upload/tmp/身份证证面-2015-03-26.png">下载</a>
+						<div class="cross"></div>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -98,11 +109,38 @@
 			<p>取消</p>
 		</div>
 	</div>
+	<div class="leave">
+		<p class="l-title">删除</p>
+		<p class="l-info">有未保存项是否离开当前页?</p>
+		<div class="np-btn l-ok">
+			<p>确认</p>
+		</div>
+		<div class="np-btn l-cancel">
+			<p>取消</p>
+		</div>
+	</div>
 	<!-- 		<div class="np-name edit" placeholder="项目名称"></div> -->
 	<div class="comments">
 		<p class="c-title">设置我的完成情况</p>
 		<textarea rows="" cols=""></textarea>
 		<p class="c-submit">提交</p>
+	</div>
+	<div class="attach">
+		<p class="a-title">添加附件</p>
+		<div class="a-info">
+			<ul>
+
+			</ul>
+			<ul>
+				<li class="a-add">+ 添加</li>
+			</ul>
+		</div>
+		<div class="np-btn a-ok">
+			<p>确认</p>
+		</div>
+		<div class="np-btn a-cancel">
+			<p>取消</p>
+		</div>
 	</div>
 	<div id="mask" class="mask" style="display: none;"></div>
 </body>
@@ -112,12 +150,99 @@
 <script type="text/javascript" src="/assets/js/project.js"></script>
 <script type="text/javascript" src="/assets/js/handsontable.full.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.js"></script>
+<script type="text/javascript" src="assets/js/attach.js"></script>
+<script type="text/javascript" src="assets/js/ajaxfileupload.js"></script>
 <script type="text/javascript">
 	$(function() {
 		var name = "";
 		var tbl = null;
 		var jsondata = null;
 		var id = $.public.get('id');
+		var uid = -1;		
+		$('.attach  .a-ok').click(function() {		
+			var arr = Array();
+			var attid = 1;
+			$('.file-box input[type=file]').each(function(){
+/* 				var id = 1;
+				if($(this).val()!=""){
+					//arr.push($(this).attr('id'));
+				} */
+	
+				if($(this).val()!=""){
+					arr.push('fileToUpload' + attid);
+				}
+				attid++;
+			});
+					
+			$.ajaxFileUpload
+			(
+				{
+					url:'action/doajaxfileupload.php',
+					secureuri:false,
+					fileElementId:arr,
+					dataType: 'json',
+					data:{num:id, id:'fileToUpload'},
+					success: function (data, status)
+					{
+						if(typeof(data.error) != 'undefined')
+						{
+							if(data.error != '')
+							{
+								alert(data.error);
+							}
+						}
+						$.attach.getAllAttach(id,function(data){
+							$.attach.reload(data);		
+						});
+						$.attach.attachAreaClear();
+						$('.attach').hide();
+						$.public.mask(false);
+					},
+					error: function (data, status, e)
+					{
+						alert(e);
+						$.attach.attachAreaClear();
+						$('.attach').hide();
+						$.public.mask(false);
+					}
+				}
+			);			
+		});
+		
+
+		
+		$('.attach  .a-cancel').click(function() {
+			$.attach.getAllAttach(id,function(data){
+				$.attach.reload(data);		
+			});
+			$.attach.attachAreaClear();
+			$('.attach').hide();
+			$.public.mask(false);
+		});
+		
+		$('.attach-bar ul li').live("hover", function(event){			
+			if(event.type=='mouseenter'){
+				if($(this).attr('owner') == uid)
+					$(this).find('.cross').show();
+			}else{
+				if($(this).attr('owner') == uid)
+					$(this).find('.cross').hide();
+			} 			
+		});
+
+		$('.attach-bar .cross').live("click",function(){
+			var atid =$(this).parent('li').attr('atid');
+			$.attach.delAttach(atid,function(){
+				$.attach.getAllAttach(id,function(data){
+					$.attach.reload(data);		
+				});	
+			});
+		});
+		
+		$.attach.getAllAttach(id,function(data){
+			$.attach.reload(data);		
+		});
+		
 		function del_project(obj) {
 			$('.del-project .dp-info').html('确认删除:<br>' + obj.find('p').html());
 			$('.del-project .dp-info').attr('attrid', obj.attr('attrid'));
@@ -130,6 +255,7 @@
 			//window.location.href = '/show-1.html?id=' + obj.attr('attrid');
 
 		}
+		var n_attrid = -1;
 		function click_project(obj) {
 
 			if (obj.find('.tt').attr('contentEditable') == 'true')
@@ -140,23 +266,22 @@
 			}
 			else
 			{
-				$("#dialog-confirm").dialog({
-					resizable : false,
-					height : 150,
-					modal : true,
-					zIndex :999,
-					//autoOpen: false,
-					buttons : {
-						"跳转" : function() {
-							window.location.href = '/show-1.html?id=' + obj.attr('attrid');
-						},
-						"不跳转" : function() {
-							$(this).dialog("close");
-						}
-					}
-				});
+				n_attrid = obj.attr('attrid');
+				$('.leave').show();
+				$.public.mask(true);
 			}
 		}
+		
+		$('.leave .l-ok').click(function(){
+			if(n_attrid != -1)
+				window.location.href = '/show.html?id=' + n_attrid;
+		});
+		
+		$('.leave .l-cancel').click(function(){
+			$('.leave').hide();
+			$.public.mask(false);
+		});
+		
 		function select_function(obj) {
 			//obj.find('.tt').css('color', 'white');
 			//obj.find('.select').css('display', 'block');
@@ -348,11 +473,12 @@
 		}
 		$.public.getUser(function(json) {
 			name = json['t_name'];
-
+			uid = json['pk_id'];
 		});
+		
 		$.menu.menuInit($('.show-project'), id, select_function, on_finish);
 		$.menu.bind(del_project, edit_project, click_project);
-
+		
 	});
 </script>
 </html>

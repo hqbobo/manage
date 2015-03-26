@@ -57,16 +57,26 @@
 
 					<li id='save' class="disable">保存</li>
 					<li id='exportxls'>导出</li>
-					<li id='print'>打印</li>
+					<li id='attach'>添加附件</li>
+					
+					<!--<li id='print'>打印</li>					
 					<object ID='WebBrowser' WIDTH=0 HEIGHT=0
 						CLASSID='CLSID:8856F961-340A-11D0-A96B-00C04FD705A2'></object>
-					<li id='attach'>添加附件</li>
-					<!--
+					
+					
 					<li id='show'>查看</li> 
 					<li id='addcol'>添加列</li>
 					<li id='addrow'>添加行</li>
 					<li id='delcol'>删除列</li>
 					<li id='delrow'>删除行</li> -->
+				</ul>
+			</div>
+			<div class="left attach-bar">
+				<ul>
+					<li class="doc">
+						<p>测试文档</p> <a href="/upload/tmp/身份证证面-2015-03-26.png">下载</a>
+						<div class="cross"></div>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -129,7 +139,20 @@
 			<p>取消</p>
 		</div>
 	</div>
-	<div id="dialog-confirm" title="有未保存项:"></div>
+	
+	<div class="leave">
+		<p class="l-title">删除</p>
+		<p class="l-info">有未保存项是否离开当前页?</p>
+		<div class="np-btn l-ok">
+			<p>确认</p>
+		</div>
+		<div class="np-btn l-cancel">
+			<p>取消</p>
+		</div>
+	</div>
+	
+	<div id="dialog-confirm" title="有未保存项:">
+	</div>
 
 	<!-- 		<div class="np-name edit" placeholder="项目名称"></div> -->
 	<div class="add-user">
@@ -193,6 +216,8 @@
 <script type="text/javascript" src="/assets/js/handsontable.full.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="/assets/js/ui.js"></script>
+<script type="text/javascript" src="/assets/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/assets/js/attach.js"></script>
 <script type="text/javascript">
 	$(function() {
 		var tbl = null;
@@ -201,7 +226,92 @@
 		var unitCol;
 		var personCol;
 		var selectRow;
+		var uid = -1;		
+		$('.attach  .a-ok').click(function() {		
+			var arr = Array();
+			var attid = 1;
+			$('.file-box input[type=file]').each(function(){
+/* 				var id = 1;
+				if($(this).val()!=""){
+					//arr.push($(this).attr('id'));
+				} */
+	
+				if($(this).val()!=""){
+					arr.push('fileToUpload' + attid);
+				}
+				attid++;
+			});
+					
+			$.ajaxFileUpload
+			(
+				{
+					url:'action/doajaxfileupload.php',
+					secureuri:false,
+					fileElementId:arr,
+					dataType: 'json',
+					data:{num:id, id:'fileToUpload'},
+					success: function (data, status)
+					{
+						if(typeof(data.error) != 'undefined')
+						{
+							if(data.error != '')
+							{
+								alert(data.error);
+							}
+						}
+						$.attach.getAllAttach(id,function(data){
+							$.attach.reload(data);		
+						});
+						$.attach.attachAreaClear();
+						$('.attach').hide();
+						$.public.mask(false);
+					},
+					error: function (data, status, e)
+					{
+						alert(e);
+						$.attach.attachAreaClear();
+						$('.attach').hide();
+						$.public.mask(false);
+					}
+				}
+			);			
+		});
+		
 
+		
+		$('.attach  .a-cancel').click(function() {
+			$.attach.getAllAttach(id,function(data){
+				$.attach.reload(data);		
+			});
+			$.attach.attachAreaClear();
+			$('.attach').hide();
+			$.public.mask(false);
+		});
+		
+		$('.attach-bar ul li').live("hover", function(event){			
+			if(event.type=='mouseenter'){
+				if($(this).attr('owner') == uid)
+					$(this).find('.cross').show();
+			}else{
+				if($(this).attr('owner') == uid)
+					$(this).find('.cross').hide();
+			} 			
+		});
+
+		$('.attach-bar .cross').live("click",function(){
+			var atid =$(this).parent('li').attr('atid');
+			$.attach.delAttach(atid,function(){
+				$.attach.getAllAttach(id,function(data){
+					$.attach.reload(data);		
+				});	
+			});
+		});
+		
+		$.attach.getAllAttach(id,function(data){
+			$.attach.reload(data);		
+		});
+		
+		
 		function del_project(obj) {
 			$('.del-project .dp-info').html(
 					'确认删除:<br><br>' + obj.find('p').html());
@@ -330,32 +440,30 @@
 					//$(this).parent('li').find('.select').css('display', 'none');
 					//$(this).parent('li').find('.tt').css('color', 'black');
 				});
+		var n_attrid = -1;
 		function click_project(obj) {
+			
 			if (obj.find('.tt').attr('contentEditable') == 'true')
 				return;
 			if ($('#save').hasClass('disable')) {
 				window.location.href = '/show.html?id=' + obj.attr('attrid');
 			} else {
-				$("#dialog-confirm").dialog(
-						{
-							resizable : false,
-							height : 150,
-							modal : true,
-							zIndex : 999,
-							//autoOpen: false,
-							buttons : {
-								"跳转" : function() {
-									window.location.href = '/show.html?id='
-											+ obj.attr('attrid');
-								},
-								"不跳转" : function() {
-									$(this).dialog("close");
-								}
-							}
-						});
+				n_attrid = obj.attr('attrid');
+				$('.leave').show();
+				$.public.mask(true);
 			}
 		}
 
+		$('.leave .l-ok').click(function(){
+			if(n_attrid != -1)
+				window.location.href = '/show.html?id=' + n_attrid;
+		});
+		
+		$('.leave .l-cancel').click(function(){
+			$('.leave').hide();
+			$.public.mask(false);
+		});
+		
 		function select_function(obj) {
 
 			obj.parent('ul').parent('.submenu').parent('.item-list').find(
@@ -526,32 +634,7 @@
 			tbl.setDataAtCell(parseInt(selectRow), parseInt(unitCol), group);
 			tbl.setDataAtCell(parseInt(selectRow), parseInt(personCol), users);
 		}
-		$('#attach').click(function() {
-			$('.attach').show();
-			$.public.mask(true);
-		});
-
-		$('.attach  .a-ok').click(function() {
-			$('.attach').hide();
-			$.public.mask(false);
-		});
-		$('.attach  .a-cancel').click(function() {
-			$('.attach').hide();
-			$.public.mask(false);
-		});
-		$('.attach .a-add').click(function() {
-			var html = "";
-				html+=('<li><div class="file-box">'+
-					'<input type="text" name="textfield" id="textfield" class="txt" />'+
-					'<input type="button" class="btn" value="..." /> <input '+
-					'type="file" name="fileField" class="file" id="fileField"'+
-					'" /></div></li>');
-				$(this).parent('ul').prev().append(html);
-		});
-		$('.file').live("change", function(){
-			//alert($(this).val());
-			$(this).parent('div').find('.txt').val($(this).val());
-		});
+		
 		/* 		function showChoiceDiv(row, units, users) {
 		 var div = $('.edit-user');
 		 $.public.mask(true);

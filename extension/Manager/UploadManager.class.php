@@ -72,18 +72,24 @@ class UploadManager{
 
 	function GetUpLoadFileArr($FILE)
 	{
+		$objs = array();
 		$url = "";
 		foreach($FILE as $file)
 		{		
-			//$msg .= $file['name'];
+			$dao = new stdClass();
+			 
+			//$url .= $file['name'];
 			//@move_uploaded_file($file['tmp_name'],$upFilePath.$file['name']);
-			$url .= $this->save($file['tmp_name'], $this->GetNewName($file['name'])).",";
+			$dao->url = $this->save($file['tmp_name'], $this->GetNewName($file['name']));
+			$dao->name = $file['name'];
 			@unlink($file['tmp_name']);
+			$obj = array_push($objs, $dao);
 		}
-		return $url;
+		return $objs;
 	}
 	private function GetNewName($name){
-		return $this->GetName($name)."-".date("Y-m-d",time()).".".$this->GetExtension($name); 
+		//return date("Y-m-d",time())."-".$name;
+		//return $this->GetName($name)."-".date("Y-m-d",time()).".".$this->GetExtension($name); 
 		return uniqid().'.'.$this->GetExtension($name);
 	}
 	private function GetExtension($file)
@@ -99,7 +105,8 @@ class UploadManager{
 	private function  save($file,$name){
 		$root = Functions::getAppDir();
 		$root .= self::tmpPath;
-		@move_uploaded_file($file,$root.$name);
+		$root .= $name;
+		@move_uploaded_file($file,$root);
 		return self::tmpPath.$name;
 	}
 	
