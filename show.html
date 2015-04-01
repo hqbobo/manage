@@ -18,8 +18,6 @@
 .warp {
 	WORD-WRAP: break-word;
 }
-
-
 </style>
 
 <title>项目显示</title>
@@ -58,7 +56,7 @@
 					<li id='save' class="disable">保存</li>
 					<li id='exportxls'>导出</li>
 					<li id='attach'>添加附件</li>
-					
+
 					<!--<li id='print'>打印</li>					
 					<object ID='WebBrowser' WIDTH=0 HEIGHT=0
 						CLASSID='CLSID:8856F961-340A-11D0-A96B-00C04FD705A2'></object>
@@ -139,7 +137,7 @@
 			<p>取消</p>
 		</div>
 	</div>
-	
+
 	<div class="leave">
 		<p class="l-title">删除</p>
 		<p class="l-info">有未保存项是否离开当前页?</p>
@@ -150,9 +148,8 @@
 			<p>取消</p>
 		</div>
 	</div>
-	
-	<div id="dialog-confirm" title="有未保存项:">
-	</div>
+
+	<div id="dialog-confirm" title="有未保存项:"></div>
 
 	<!-- 		<div class="np-name edit" placeholder="项目名称"></div> -->
 	<div class="add-user">
@@ -193,7 +190,7 @@
 		<p class="a-title">添加附件</p>
 		<div class="a-info">
 			<ul>
-				
+
 			</ul>
 			<ul>
 				<li class="a-add">+ 添加</li>
@@ -207,6 +204,7 @@
 		</div>
 	</div>
 	<div id="mask" class="mask" style="display: none;"></div>
+	<div id="tip" class="tip-info"></div>
 </body>
 <script type="text/javascript" src="/assets/js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/public.js"></script>
@@ -226,92 +224,100 @@
 		var unitCol;
 		var personCol;
 		var selectRow;
-		var uid = -1;		
-		$('.attach  .a-ok').click(function() {		
+		var uid = -1;
+
+		$('.tt').live("hover", function(event) {
+			if ($(this).html().indexOf("...") > 0) {
+				if (event.type == 'mouseenter') {
+					var X = $(this).offset().top + $(this).height();
+					var Y = $(this).offset().left + $(this).width();
+					//alert($(this).offset().top + '---' + $(this).offset().left + '---' +$(this).height()+ '---' +$(this).width());
+					//alert(X+"=="+Y);
+					$.public.tip(true, $(this).attr('data'), Y, X);
+				} else {
+					$.public.tip(false);
+				}
+			}
+		});
+
+		$('.attach  .a-ok').click(function() {
 			var arr = Array();
 			var attid = 1;
-			$('.file-box input[type=file]').each(function(){
-/* 				var id = 1;
-				if($(this).val()!=""){
-					//arr.push($(this).attr('id'));
-				} */
-	
-				if($(this).val()!=""){
+			$('.file-box input[type=file]').each(function() {
+				/* 				var id = 1;
+				 if($(this).val()!=""){
+				 //arr.push($(this).attr('id'));
+				 } */
+
+				if ($(this).val() != "") {
 					arr.push('fileToUpload' + attid);
 				}
 				attid++;
 			});
-					
-			$.ajaxFileUpload
-			(
-				{
-					url:'action/doajaxfileupload.php',
-					secureuri:false,
-					fileElementId:arr,
-					dataType: 'json',
-					data:{num:id, id:'fileToUpload'},
-					success: function (data, status)
-					{
-						if(typeof(data.error) != 'undefined')
-						{
-							if(data.error != '')
-							{
-								alert(data.error);
-							}
-						}
-						$.attach.getAllAttach(id,function(data){
-							$.attach.reload(data);		
-						});
-						$.attach.attachAreaClear();
-						$('.attach').hide();
-						$.public.mask(false);
-					},
-					error: function (data, status, e)
-					{
-						alert(e);
-						$.attach.attachAreaClear();
-						$('.attach').hide();
-						$.public.mask(false);
-					}
-				}
-			);			
-		});
-		
 
-		
+			$.ajaxFileUpload({
+				url : 'action/doajaxfileupload.php',
+				secureuri : false,
+				fileElementId : arr,
+				dataType : 'json',
+				data : {
+					num : id,
+					id : 'fileToUpload'
+				},
+				success : function(data, status) {
+					if (typeof (data.error) != 'undefined') {
+						if (data.error != '') {
+							alert(data.error);
+						}
+					}
+					$.attach.getAllAttach(id, function(data) {
+						$.attach.reload(data);
+					});
+					$.attach.attachAreaClear();
+					$('.attach').hide();
+					$.public.mask(false);
+				},
+				error : function(data, status, e) {
+					alert(e);
+					$.attach.attachAreaClear();
+					$('.attach').hide();
+					$.public.mask(false);
+				}
+			});
+		});
+
 		$('.attach  .a-cancel').click(function() {
-			$.attach.getAllAttach(id,function(data){
-				$.attach.reload(data);		
+			$.attach.getAllAttach(id, function(data) {
+				$.attach.reload(data);
 			});
 			$.attach.attachAreaClear();
 			$('.attach').hide();
 			$.public.mask(false);
 		});
-		
-		$('.attach-bar ul li').live("hover", function(event){			
-			if(event.type=='mouseenter'){
-				if($(this).attr('owner') == uid)
+
+		$('.attach-bar ul li').live("hover", function(event) {
+			if (event.type == 'mouseenter') {
+				if ($(this).attr('owner') == uid)
 					$(this).find('.cross').show();
-			}else{
-				if($(this).attr('owner') == uid)
+			} else {
+				if ($(this).attr('owner') == uid)
 					$(this).find('.cross').hide();
-			} 			
+			}
 		});
 
-		$('.attach-bar .cross').live("click",function(){
-			var atid =$(this).parent('li').attr('atid');
-			$.attach.delAttach(atid,function(){
-				$.attach.getAllAttach(id,function(data){
-					$.attach.reload(data);		
-				});	
+		$('.attach-bar .cross').live("click", function() {
+			var atid = $(this).parent('li').attr('atid');
+			$.attach.delAttach(atid, function() {
+				$.attach.getAllAttach(id, function(data) {
+					$.attach.reload(data);
+				});
 			});
 		});
-		
-		$.attach.getAllAttach(id,function(data){
-			$.attach.reload(data);		
+
+		$.attach.getAllAttach(id, function(data) {
+			$.attach.reload(data);
 		});
-		
-		
+
 		function del_project(obj) {
 			$('.del-project .dp-info').html(
 					'确认删除:<br><br>' + obj.find('p').html());
@@ -432,17 +438,9 @@
 			$.public.mask(false);
 		});
 
-		$('.submenu .tt').live(
-				"blur",
-				function() {
-					$.project.changeTitle($(this).parent('li').attr('attrid'),
-							$(this).html());
-					//$(this).parent('li').find('.select').css('display', 'none');
-					//$(this).parent('li').find('.tt').css('color', 'black');
-				});
 		var n_attrid = -1;
 		function click_project(obj) {
-			
+
 			if (obj.find('.tt').attr('contentEditable') == 'true')
 				return;
 			if ($('#save').hasClass('disable')) {
@@ -454,16 +452,16 @@
 			}
 		}
 
-		$('.leave .l-ok').click(function(){
-			if(n_attrid != -1)
+		$('.leave .l-ok').click(function() {
+			if (n_attrid != -1)
 				window.location.href = '/show.html?id=' + n_attrid;
 		});
-		
-		$('.leave .l-cancel').click(function(){
+
+		$('.leave .l-cancel').click(function() {
 			$('.leave').hide();
 			$.public.mask(false);
 		});
-		
+
 		function select_function(obj) {
 
 			obj.parent('ul').parent('.submenu').parent('.item-list').find(
@@ -498,6 +496,9 @@
 							;
 						});
 
+		$('.eu-del').live('click', function() {
+			$(this).parent('ul').remove();
+		});
 		$('.eu-add')
 				.live(
 						"click",
@@ -505,7 +506,7 @@
 							$(this)
 									.parent('ul')
 									.before(
-											'<ul><li><select class="eu-group"></select></li><li><select class="eu-user"></select></li></ul>');
+											'<ul><li><select class="eu-group"></select></li><li><select class="eu-user"></select></li><div class="eu-del""></div></ul>');
 							var group = $(this).parent('ul').prev("ul").find(
 									'.eu-group');
 							var user = $(this).parent('ul').prev("ul").find(
@@ -634,7 +635,7 @@
 			tbl.setDataAtCell(parseInt(selectRow), parseInt(unitCol), group);
 			tbl.setDataAtCell(parseInt(selectRow), parseInt(personCol), users);
 		}
-		
+
 		/* 		function showChoiceDiv(row, units, users) {
 		 var div = $('.edit-user');
 		 $.public.mask(true);

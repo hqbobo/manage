@@ -43,7 +43,7 @@
 			{
 				
 				html += '<li attrid='+jsons[i].data[j].t_pkid+
-					'><p class="tt">'+jsons[i].data[j].t_month
+					'><p class="tt" data="'+jsons[i].data[j].t_projectName+'">'+jsons[i].data[j].t_month
 					+'.'+jsons[i].data[j].t_day+' '+SetString(jsons[i].data[j].t_projectName, 18)+'</p>';
 				html+='<p class="del_btn"><p class="edit_btn"></p><div class="select"></div></li>';
 			}

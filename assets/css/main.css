@@ -1,46 +1,80 @@
 @CHARSET "UTF-8";
-ul {list-style:none;margin:0px;padding:0px;} 
-p {margin:0px;padding:0px;}
 
-body{font-size:15px;}
-a {text-decoration: none;}
-a:hover {color:red;}
-.mask {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    opacity: 0.75;
-    background-color: #000;
-    z-index: 200;
+ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
 }
 
-.edit{
+p {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	font-size: 15px;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	color: red;
+}
+
+.mask {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0.75;
+	background-color: #000;
+	z-index: 200;
+}
+
+.edit {
 	background: white;
 	border-radius: 5px;
 	border: 1px solid #b6c0cd;
 }
-#text-main
-{
-	min-height:500px;
+
+#text-main {
+	min-height: 500px;
 	border-bottom: 2px solid #D1D8E1;
 }
-.main-bg
-{
-	background: url("/frwk/picture/main-bg.jpg") no-repeat scroll 0px 0px transparent;
+
+.main-bg {
+	background: url("/frwk/picture/main-bg.jpg") no-repeat scroll 0px 0px
+		transparent;
 }
-.middle
-{
-	height:92px;
+
+.middle {
+	height: 92px;
 }
-.main
-{
+
+.main {
 	height: 502px;
 	width: 1200px;
 	position: relative;
 }
-.default,.default_pass,.default_area
-{
-	color:rgb(106,107,106);
+
+.default,.default_pass,.default_area {
+	color: rgb(106, 107, 106);
+}
+
+.tip-info {
+	position: absolute;
+	background: none repeat scroll 0% 0% #F7F8FA;
+	min-width: 100px;
+	max-width: 300px;
+	min-height: 20px;
+	border: 1px solid #D1D8E1;
+	border-radius: 5px;
+	box-shadow: 1px 1px 1px 1px;
+	z-index: 1000;
+	padding: 5px;
+	text-align: left;
+	text-indent: 20px;
 }

@@ -30,7 +30,7 @@
 	margin-left:-1px;
 }
 
-.logo, .date,.spliter,.user,.logout
+.logo, .date,.spliter,.user,.logout, .change
 {
 	float:left
 }
@@ -46,13 +46,56 @@
 	height:43px;
 	background: url("/frwk/picture/logo.png") no-repeat scroll 0px 0px transparent;
 }
+.change a:hover
+{
+	color:red;
+	cursor: pointer;
+}
+.pwd-change
+{
+	display: none;
+	width: 226px;
+	height: 200px;
+	background: url("/frwk/picture/new-project.png") no-repeat scroll 0px 0px transparent;
+	position: absolute;
+	top: 250px;
+	left: 45%;
+	border-radius: 5px;
+	z-index: 201;
+}
+.pwd-change .pc-title {
+    color: #848687;
+    margin-left: 80px;
+    margin-top: 8px;
+}
+.pwd-change .pc-info {
+    height: 50px;
+    margin-top: 25px;
+    text-align: left;
+    margin-left: 20px;
+}
+.pwd-change .pc-ok {
+    margin-top: 18px;
+    margin-left: 25px;
+    background: url("/frwk/picture/np-ok.png") no-repeat scroll 0px 0px transparent;
+}
+.pwd-change .pc-cancel {
+    margin-top: 5px;
+    margin-left: 25px;
+    background: url("/frwk/picture/np-cancel.png") no-repeat scroll 0px 0px transparent;
+}
+#change-pwd
+{
+	width: 180px;
+	height: 20px;
+}
 .date
 {
 	color:white;
 	
 	margin-left: 30px;
 	
-	width:800px;
+	width:750px;
 }
 .new-project-btn
 {
@@ -73,7 +116,7 @@
 	font-weight: bold;
 	cursor: pointer;
 }
-.date, .user , .logout
+.date, .user , .logout, .change
 {
 	margin-top: 11px;
 	font-size:18px;
@@ -82,7 +125,7 @@
 {
 	color:white;
 }
-.logout a
+.logout a , .change a
 {
 	color:white;
 }
@@ -108,6 +151,7 @@
 	margin-top: 30px;
 	font-size: 24px;
 	font-weight: bold;
+	text-indent: 40px;
 }
 .show-project
 {
@@ -207,7 +251,8 @@
 	background: url("/frwk/picture/np-cancel.png") no-repeat scroll 0px 0px transparent;
 }
 .np-ok p ,.dp-cancel p, .np-cancel p, .dp-ok p , .ep-cancel p, .ep-ok p
-,.eu-ok p, .eu-cancel p, .a-ok p,  .a-cancel p, .l-ok p, .l-cancel p
+,.eu-ok p, .eu-cancel p, .a-ok p,  .a-cancel p, .l-ok p, .l-cancel p,
+.pc-ok p, .pc-cancel p
 {
 	text-align: center;
 	padding-top:5px;
@@ -464,6 +509,7 @@
 .edit-user .eu-info ul{
 	text-align: center;
 	margin-bottom:10px;
+	position: relative;
 }
 .edit-user .eu-info ul li
 {
@@ -499,7 +545,16 @@
 	margin: 10px auto;
 	background: url("/frwk/picture/np-ok.png") no-repeat scroll 0px 0px transparent;
 }
-
+ .eu-del 
+ {
+    position: absolute;
+    left: 10px;
+    background: url("/frwk/picture/del-btn.gif") no-repeat scroll 0px 0px transparent;
+    width: 23px;
+    height: 23px;
+    top: 1px;
+    cursor: pointer;
+}
 
 
 .attach

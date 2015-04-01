@@ -2,6 +2,7 @@
 <?php
 
 $usr = $session->get ( "usrSession" );
+
 if ($usr->t_level < User::RootAdminLevel) {
 	$json ['status'] = ErrorCode::E_LEVEL_REQUIRED;
 	$json ['msg'] = ErrorCode::GetErr ( $json ['status'] );

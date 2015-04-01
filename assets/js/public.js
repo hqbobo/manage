@@ -131,6 +131,17 @@
 			} else {
 				$('.mask').hide();
 			}
+		},
+		tip : function(flag, text, left ,top) {
+			var obj = $('.tip-info');
+			if(flag == true){				
+				obj.html(text);
+				obj.css('left', left);
+				obj.css('top', top);
+				obj.show()
+			}
+			else
+				obj.hide();
 		}
 	};
 	function editPrepare() {
@@ -165,8 +176,29 @@
 		});
 	}
 	
-	
-	
+	$('.change').click(function(){
+		$.public.mask(true);
+		$('.pwd-change').show();
+	});
+	$('.pc-ok').click(function(){
+		if($('#change-pwd').val()=="")
+		{
+			alert("请填写新密码");
+			$.public.mask(false);
+			$('.pwd-change').hide();
+			return;
+		}
+		$.admin.userPwdChange(hex_md5($('#change-pwd').val()), function(){
+			$('#change-pwd').val("");
+			$.public.mask(false);
+			$('.pwd-change').hide();
+		});
+		
+	});
+	$('.pc-cancel').click(function(){
+		$.public.mask(false);
+		$('.pwd-change').hide();
+	});
 	$.public.auth();
 	editPrepare();
 	dataInit();

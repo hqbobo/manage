@@ -124,7 +124,7 @@ foreach ($new_arr as  $var)
 }
 //exit();
 // Rename worksheet
-$objPHPExcel->getActiveSheet()->setTitle($pj[0]->t_projectName);
+$objPHPExcel->getActiveSheet()->setTitle("sheet1");
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet

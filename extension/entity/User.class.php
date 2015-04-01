@@ -83,6 +83,13 @@ class User extends BaseEntity
 		else 
 			return false;
 	}
+	public function PwdChange($pwd,$id)
+	{
+		$all = $this->query("update ".$this->db_table." set t_pwd='".$pwd."' where pk_id =".$id);
+		if($all === false)
+			return false;
+		return true;
+	}
 }
 
 ?>
