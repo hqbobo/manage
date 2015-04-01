@@ -184,8 +184,6 @@
 		if($('#change-pwd').val()=="")
 		{
 			alert("请填写新密码");
-			$.public.mask(false);
-			$('.pwd-change').hide();
 			return;
 		}
 		$.admin.userPwdChange(hex_md5($('#change-pwd').val()), function(){

@@ -68,8 +68,9 @@
 			<div class="np-btn pc-ok"><p>确认</p></div>
 			<div class="np-btn pc-cancel"><p>取消</p></div>
 	</div>
-	<div id="mask" class="mask" style="display:none;">    
-</div>
+	<div id="mask" class="mask" style="display:none;"> </div>   
+	<div id="tip" class="tip-info" style="display:none;"></div>
+
 </body>
 <script type="text/javascript" src="/assets/js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/md5-min.js"></script>
@@ -80,6 +81,19 @@
 
 <script type="text/javascript">
 $(function(){	
+	$('.tt').live("hover", function(event) {
+		if ($(this).html().indexOf("...") > 0) {
+			if (event.type == 'mouseenter') {
+				var X = $(this).offset().top + $(this).height();
+				var Y = $(this).offset().left + $(this).width();
+				//alert($(this).offset().top + '---' + $(this).offset().left + '---' +$(this).height()+ '---' +$(this).width());
+				//alert(X+"=="+Y);
+				$.public.tip(true, $(this).attr('data'), Y, X);
+			} else {
+				$.public.tip(false);
+			}
+		}
+	});
 	function del_project(obj)
 	{
 		$('.del-project .dp-info').html('确认删除:<br>'+obj.find('p').html());
