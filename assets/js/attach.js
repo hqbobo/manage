@@ -84,6 +84,33 @@
 				}
 			});
 		},
+		getAttach : function(id,pjname,func) {
+			var data = 'act=getAttach&pjname='+pjname+'&id=' + id;
+			$.ajax({
+				url : '/action/projectAction.php',
+				type : 'post',
+				data : data,//form.serialize(),
+				cache : false,
+				dataType : "json",
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("服务器无响应! status: " + textStatus);
+					//window.location.href = '/login.html';
+				},
+				success : function(json, textStatus) {
+
+					switch (json['status']) {
+					case 0:
+						//alert(JSON.stringify(json['data']));
+						func(json['data']);
+						break;
+					default:
+						alert(json['msg']);
+						break;
+					}
+				}
+			});
+		},
+		
 		reload : function(data)
 		{
 			var html = "";

@@ -58,8 +58,8 @@
 
 					<li id='save' class="disable">保存</li>
 					<li id='exportxls'>导出</li>
-					<li id='attach'>添加附件</li>
-					<!--
+					<!--<li id='attach'>添加附件</li>
+					
 					<li id='show'>查看</li> 
 					<li id='addcol'>添加列</li>
 					<li id='addrow'>添加行</li>
@@ -67,14 +67,14 @@
 					<li id='delrow'>删除行</li> -->
 				</ul>
 			</div>
-			<div class="left attach-bar">
+<!-- 			<div class="left attach-bar">
 				<ul>
 					<li class="doc">
 						<p>测试文档</p> <a href="/upload/tmp/身份证证面-2015-03-26.png">下载</a>
 						<div class="cross"></div>
 					</li>
 				</ul>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<div id="dialog-confirm" title="有未保存项:"></div>
@@ -144,6 +144,49 @@
 			<p>取消</p>
 		</div>
 	</div>
+	
+	<div class="attach-show">
+		<p class="as-title">查看附件</p>
+		<div class="as-info">
+			<div class=" attach-bar">
+				<ul>
+					<li class="doc">
+						<p>测试文档</p> <a href="/upload/tmp/身份证证面-2015-03-26.png">下载</a>
+						<div class="cross"></div>
+					</li>
+					<li class="doc">
+						<p>测试文档</p> <a href="/upload/tmp/身份证证面-2015-03-26.png">下载</a>
+						<div class="cross"></div>
+					</li>
+					<li class="doc">
+						<p>测试文档</p> <a href="/upload/tmp/身份证证面-2015-03-26.png">下载</a>
+						<div class="cross"></div>
+					</li>
+					<li class="doc">
+						<p>测试文档</p> <a href="/upload/tmp/身份证证面-2015-03-26.png">下载</a>
+						<div class="cross"></div>
+					</li>
+					<li class="doc">
+						<p>测试文档</p> <a href="/upload/tmp/身份证证面-2015-03-26.png">下载</a>
+						<div class="cross"></div>
+					</li>
+					<li class="doc">
+						<p>测试文档</p> <a href="/upload/tmp/身份证证面-2015-03-26.png">下载</a>
+						<div class="cross"></div>
+					</li>
+					<li class="doc">
+						<p>测试文档</p> <a href="/upload/tmp/身份证证面-2015-03-26.png">下载</a>
+						<div class="cross"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="np-btn as-cancel">
+			<p>关闭</p>
+		</div>
+	</div>
+	
 	<div class="pwd-change">
 		<p class="pc-title">密码修改</p>
 		<p class="pc-info"><input type="text" id='change-pwd' class="default" default_text="新密码"></p>
@@ -171,7 +214,8 @@
 		var jsondata = null;
 		var id = $.public.get('id');
 		var uid = -1;		
-		
+		var load =false; //标记是否读取完成
+		var projectName = "";
 		$('.tt').live("hover", function(event) {
 			if ($(this).html().indexOf("...") > 0) {
 				if (event.type == 'mouseenter') {
@@ -208,7 +252,7 @@
 					secureuri:false,
 					fileElementId:arr,
 					dataType: 'json',
-					data:{num:id, id:'fileToUpload'},
+					data:{num:id, id:'fileToUpload',pjname:projectName},
 					success: function (data, status)
 					{
 						if(typeof(data.error) != 'undefined')
@@ -217,17 +261,15 @@
 							{
 								alert(data.error);
 							}
-						}
-						$.attach.getAllAttach(id,function(data){
-							$.attach.reload(data);		
-						});
+						}						
+						location.reload();	
 						$.attach.attachAreaClear();
 						$('.attach').hide();
 						$.public.mask(false);
 					},
 					error: function (data, status, e)
 					{
-						alert(e);
+						//alert(e);
 						$.attach.attachAreaClear();
 						$('.attach').hide();
 						$.public.mask(false);
@@ -260,15 +302,12 @@
 		$('.attach-bar .cross').live("click",function(){
 			var atid =$(this).parent('li').attr('atid');
 			$.attach.delAttach(atid,function(){
-				$.attach.getAllAttach(id,function(data){
+				$.attach.getAttach(id,projectName,function(data){
 					$.attach.reload(data);		
 				});	
 			});
 		});
 		
-		$.attach.getAllAttach(id,function(data){
-			$.attach.reload(data);		
-		});
 		
 		function del_project(obj) {
 			$('.del-project .dp-info').html('确认删除:<br>' + obj.find('p').html());
@@ -337,6 +376,83 @@
 		}
 		var g_commentRow =-1;
 		var g_commentCol =-1;
+		$('.attach-show .as-cancel').click(function(){
+			location.reload();	
+			$('.attach-show').hide();
+			$.public.mask(false);
+		});
+		function showAttach(row){
+			
+			var head = tbl.getData()[0];
+			var data = tbl.getData()[row];
+			var pjCol = -1;
+			var personCol = -1;
+			for ( var i in head) {
+				if (head[i] == '责任人')
+					personCol = i;
+				if (head[i] == '项目')
+					pjCol = i;
+			}
+			
+			if( pjCol == -1 || personCol == -1)
+			{
+				alert('表格有错误');
+				return;
+			}
+			
+			projectName = data[pjCol];
+			//alert(projectName);
+			
+			$('.attach-show').show();
+			$.public.mask(true);
+			$.attach.getAttach(id,projectName,function(data){
+				$.attach.reload(data);		
+			});
+		}
+		
+		function setAttach(row) {
+			var head = tbl.getData()[0];
+			var data = tbl.getData()[row];
+			var pjCol = -1;
+			var personCol = -1;
+			var commentCol = -1;
+			var mycomment = "";
+			for ( var i in head) {
+				if (head[i] == '责任人')
+					personCol = i;
+				if (head[i] == '项目')
+					pjCol = i;
+				if (head[i] == '完成情况')
+					commentCol = i;
+			}
+			
+			if( pjCol == -1 || personCol == -1
+					|| commentCol == 1)
+			{
+				alert('表格有错误');
+				return;
+			}
+			
+			projectName = data[pjCol];
+			//alert(projectName);
+			
+			selectUser = data[personCol];
+			var userstrs = new Array();
+			userstrs = selectUser.split("\n");
+			for (i = 0; i < userstrs.length; i++) {
+				if (userstrs[i] != "") {
+					if (name == userstrs[i]) {
+						g_commentRow = row;
+						g_commentCol = commentCol;
+						 $('.attach').show();
+						  $.public.mask(true);
+						return;
+					}
+
+				}
+			}
+			alert('你不是当前责任人.');
+		}
 		
 		function setSelect(row) {
 			var head = tbl.getData()[0];
@@ -461,10 +577,23 @@
 							setSelect(this.getSelected()[0]);
 						}
 
+						if (key === 'add_attach') {
+							setAttach(this.getSelected()[0])							
+						}
+						if (key === 'show_attach') {
+							showAttach(this.getSelected()[0]);
+						}
+
 					},
 					items : {
 						"set_finish" : {
 							name : '设置完成信息'
+						},
+						"add_attach" : {
+							name : '添加附件'
+						},
+						"show_attach" : {
+							name : '查看附件'
 						},
 					}
 				},
@@ -473,7 +602,8 @@
 
 					cellProperties.readOnly = true; //make cell read-only if it is first row or the text reads 'readOnly'
 
-					cellProperties.renderer = textWarp; //uses lookup map    	    
+					cellProperties.renderer = textWarp; //uses lookup map
+
 					return cellProperties;
 				},
 				beforeRemoveCol : function(index, amount) {
@@ -484,6 +614,14 @@
 					}
 
 				},
+				afterLoadData :function(){
+					console.log('afterLoadData');
+
+					
+				},
+				afterInit:function(){
+					load =true;	
+				}
 			});
 		}
 		function onload(json) {
@@ -495,8 +633,137 @@
 			jsondata = eval(json[0].t_tables);
 			tbl_onload();
 		}
+		
+		/* {
+			"t_pkId":"43",
+			"url":"/upload/tmp/552e60ba96e22.rtf",
+			"fk_projectId":"18",
+			"name":"修改.rtf",
+			"fk_user":"27",
+			"fk_projectname":"项目2",
+			"t_name":"管理员"
+		} */
+		
+		// 附件的处理开始
+		var attaches = null;
+		function clearAttach(tb)
+		{
+			
+			for(var i in tb)
+			{
+				var line = tbl.getData()[i];
+				if(i > 0)
+				{
+					for(var j in line)
+					{
+						if(tbl.getDataAtCell(0, j) ==  "附件")
+						{
+							console.log('i='+i+':j='+j);
+							tbl.setDataAtCell(parseInt(i), parseInt(j), "");
+						}
+					}
+				}				
+			}
+		}
+		function addAttach(tb, data)
+		{			
+			var projectIndex = -1;
+			var attachIndex = -1;
+			var attachContent = false;
+			//alert(JSON.stringify(data));
+			for(var i in tb)
+			{
+				var line = tbl.getData()[i];
+				if(i == 0)
+				{
+					for(var j in line)
+					{
+						if(line[j] == "项目")
+						{
+							projectIndex = j;							
+						}
+						if(line[j] == "附件")
+						{
+							attachIndex = j;							
+						}
+					}
+					continue;
+				}
+				if(projectIndex == -1 || attachIndex == -1)
+				{
+					alert("表格错误 找不到 项目|附件 列;");
+					return;
+				}
+				
+				if(line[0] == null)
+					break;				
+				
+				if(data.fk_projectname == line[projectIndex])
+				{
+					
+					attachContent = tbl.getDataAtCell(i, attachIndex);
+					if(attachContent == null)
+						attachContent ="";
+					attachContent += data.t_name+":"+data.name+"\n";
+					tbl.setDataAtCell (parseInt(i), parseInt(attachIndex), attachContent);
+				}
+				
+				//alert(JSON.stringify(line));
+				//alert(JSON.stringify(data[i]));
+			}
+			
+			
+		}
+		
+		// 附件的处理结束
+		var time = 0;
+		var func;
+		function wait_recursive()
+		{
+			if(load == false){
+				console.log("wait "+time);
+				setTimeout( wait_recursive, time);
+			}
+			else{
+				console.log("wait finish");
+				func();
+			}
+		}
+		function wait(msec, success_func)
+		{
+			time = msec;
+			func = success_func;
+			
+			wait_recursive();
+			
+			
+		}
+		
+		
 		function on_finish(obj) {
 			$.project.get(id, onload);
+			$.public.mask(true);
+			wait(500,function(){
+				console.log("getAllAttach");
+				$.attach.getAllAttach(id,function(data){
+					attaches = data;
+					var tb = tbl.getData();
+					//alert(JSON.stringify(data));
+					clearAttach(tb);
+					for(var i in data)
+					{
+						addAttach(tb, data[i]);
+						//alert(JSON.stringify(data[i]));
+					}
+					
+					//老方案
+					//$.attach.reload(data);		
+				});
+				$.public.mask(false);
+			});
+			
+			
+
 		}
 		$.public.getUser(function(json) {
 			name = json['t_name'];
@@ -505,6 +772,9 @@
 		
 		$.menu.menuInit($('.show-project'), id, select_function, on_finish);
 		$.menu.bind(del_project, edit_project, click_project);
+		
+		
+		
 		
 	});
 </script>

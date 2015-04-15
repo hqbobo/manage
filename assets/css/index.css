@@ -21,7 +21,7 @@
 	min-height:600px;
 	background: #f7f8fa;
 	border:2px solid black;	
-	overflow: hidden;
+	
 }
 .top-banner
 {	
@@ -252,7 +252,7 @@
 }
 .np-ok p ,.dp-cancel p, .np-cancel p, .dp-ok p , .ep-cancel p, .ep-ok p
 ,.eu-ok p, .eu-cancel p, .a-ok p,  .a-cancel p, .l-ok p, .l-cancel p,
-.pc-ok p, .pc-cancel p
+.pc-ok p, .pc-cancel p, .as-cancel p
 {
 	text-align: center;
 	padding-top:5px;
@@ -556,7 +556,67 @@
     cursor: pointer;
 }
 
+.attach-show {
+    display: none;
+    width: 400px;
+    min-height: 220px;
+    background: url("/frwk/picture/panelbase.png") no-repeat scroll 0px 0px transparent;
+    position: absolute;
+    top: 230px;
+    left: 40%;
+    border-radius: 5px;
+    z-index: 1000;
+}
 
+
+.attach-show .as-title
+{
+	color: #848687;
+	text-align: center;
+	margin-top: 8px;
+}
+.attach-show .as-info
+{
+	margin-top: 20px;
+	min-height:120px;
+	width:100%;
+}
+.attach-show .as-info ul{
+	text-align: center;
+	margin-bottom:10px;
+}
+.attach-show .as-info ul li
+{
+	display:inline-block;
+	margin-bottom: 5px;
+}
+.attach-show .as-info ul .a-add
+{
+	height: 22px;
+	width: 240px;
+	border: 1px dashed rgb(206,206,206);
+	border-radius: 5px;
+	padding-top: 5px;
+	color:rgb(206,206,206);
+	cursor: pointer;
+}
+
+.attach-show .as-cancel
+{
+	margin: 10px auto;
+	background: url("/frwk/picture/np-cancel.png") no-repeat scroll 0px 0px transparent;
+}
+.attach-show .as-ok
+{
+	color:white;
+	margin: 10px auto;
+	background: url("/frwk/picture/np-ok.png") no-repeat scroll 0px 0px transparent;
+}
+
+.attach-show .attach-bar
+{
+	margin-left: 20px;
+}
 .attach
 {
 	display: none;

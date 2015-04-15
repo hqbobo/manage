@@ -55,7 +55,7 @@ a:hover {
 }
 
 .main {
-	height: 502px;
+	height: 618px;
 	width: 1200px;
 	position: relative;
 }
@@ -65,6 +65,7 @@ a:hover {
 }
 
 .tip-info {
+	display:none;
 	position: absolute;
 	background: none repeat scroll 0% 0% #F7F8FA;
 	min-width: 100px;

@@ -134,6 +134,15 @@ switch ($act) {
 		$json ['msg'] = '执行成功';
 		$json ['data'] = $entity->GetByProject ( $id );
 		break;
+		
+	case 'getAttach' :
+		$id = $_POST ['id'];
+		$pjname = $_POST ['pjname'];
+		$entity = new AttachEntity ();
+		$json ['msg'] = '执行成功';
+		$json ['data'] = $entity->GetByProjectAndName ( $id ,$pjname);
+		break;	
+			
 	case 'delAttach' :
 		$id = $_POST ['id'];
 		$entity = new AttachEntity ();

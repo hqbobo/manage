@@ -133,7 +133,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 
 // Redirect output to a client’s web browser (Excel5)
 header('Content-Type: application/vnd.ms-excel;charset=UTF-8');
-header('Content-Disposition: attachment;filename="'.$filename.'.xls"');
+header('Content-Disposition: attachment;filename="down.xls"');
 header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');

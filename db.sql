@@ -41,5 +41,6 @@ CREATE TABLE  `admin`.`attach` (
   `fk_projectId` int(10) unsigned NOT NULL,
   `name` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `fk_user` int(10) unsigned NOT NULL,
+  `fk_projectname` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`t_pkId`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

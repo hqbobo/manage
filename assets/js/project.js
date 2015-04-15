@@ -9,6 +9,7 @@
 		            data : data,//form.serialize(),
 		            cache : false,
 		            dataType : "json",
+		            asyn:false,
 		            error : function(XMLHttpRequest, textStatus, errorThrown) {
 		                alert("服务器无响应! status: " + textStatus);
 		                //window.location.href = '/login.html';

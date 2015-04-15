@@ -13,7 +13,7 @@ class ProjectEntity extends BaseEntity
 	}
 	public function insert($pjname,$year,$month,$day)
 	{
-		$all = $this->query('insert into t_project (t_projectName, t_year,t_month,t_day ,t_tables) values("'.$pjname.'",'.$year.','.$month.','.$day.',"[[\"项目\",\"责任科室\",\"责任人\",\"完成情况\"]]");');
+		$all = $this->query('insert into t_project (t_projectName, t_year,t_month,t_day ,t_tables) values("'.$pjname.'",'.$year.','.$month.','.$day.',"[[\"项目\",\"责任科室\",\"责任人\",\"完成情况\",\"附件\"]]");');
 		//echo 'insert into t_project (t_projectName, t_year,t_month,t_day) values("'.$pjname.'",'.$year.','.$month.','.$day.');';
 		if($all === false)
 			return false;
